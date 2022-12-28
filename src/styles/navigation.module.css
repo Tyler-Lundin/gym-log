@@ -1,0 +1,155 @@
+.blurContainer {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	top: 0;
+	backdrop-filter: blur(5px);
+	z-index: 1;
+	animation: fadeIn 0.2s ease-in-out;
+	background-color: rgba(0,0,0,0.3);
+}
+
+.navClose {
+	display: grid;
+	background: none;
+	border: none;
+	place-content: center;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	width: 40px;
+	height: 40px;
+	z-index: 1;
+}
+
+.nav {
+	color: white;
+	width: fit-content;
+	min-width: 300px;
+	height: 100vh;
+	position: absolute;
+	background-color: rgba(30,30,30,0.8);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	right: 0;
+        top: 0;
+        transform: translateX(100%);
+	transition: transform 0.3s ease-in-out;
+}
+
+.nav > ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	height: 100%;
+	place-content: center;
+	position: relative;
+	top: 0;
+}
+
+.nav > ul > li {
+	display: flex;
+	top: -100%;
+	flex-direction: column;
+	align-items: center;
+}
+
+.nav > ul > li > a {
+	text-decoration: none;
+	color: white;
+	font-size: 2rem ;
+	font-weight: 600 ;
+	padding: 1rem 0;
+}
+
+.navOpen {
+	transform: translateX(0);
+	color: white;
+}
+
+.navOpen > ul {
+	right: 0;
+}
+
+.navContainer {
+	position: absolute;
+	width: fit-content;
+	height: fit-content;
+	top: 0;
+	right: 0;
+	padding: 10px;
+	z-index: 100;
+	isolation: isolate;
+}
+
+
+.navOpenButton {
+	font-size: 1.8rem !important;
+	font-weight: 300 !important;
+	text-transform: lowercase !important;
+	all: unset;
+	cursor: pointer;
+	position: relative;
+	padding: 10px;
+	color: white;
+	border-radius: 0 1rem 1rem 1rem;
+	border: 1px solid transparent;
+	transition: all 0.2s ease-in-out;
+    overflow: hidden;
+}
+
+.navOpenButton:hover {
+    border: 1px solid white;
+}
+
+.navOpenButton > svg {
+    transition: all 0.3s ease-in-out;
+}
+
+.navOpenButton:hover > svg {
+}
+
+.navOpenButton:focus {
+	outline: none;
+	border: 1px solid rgb(50,200,50);
+}
+
+
+.navOpenButton:focus > svg {
+    fill: rgb(50,200,50);
+}
+
+.navClose:hover {
+    border: 1px solid rgb(200,50,50);
+    outline: none;
+}
+
+.navClose:focus {
+    border: 1px solid rgb(200,50,50);
+    outline: none;
+}
+
+.navClose > svg {
+    transition: all 0.3s ease-in-out;
+}
+
+.navClose:hover > svg {
+    transform: rotate(180deg);
+    fill: rgb(200,50,50);
+}
+
+.navClose:focus > svg {
+    transform: rotate(180deg);
+    fill: rgb(200,50,50);
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

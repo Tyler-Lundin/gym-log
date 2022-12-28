@@ -1,0 +1,58 @@
+.addExerciseContainer {
+	width: 100%;
+	height: fit-content;
+	padding: 1rem;
+	box-sizing: border-box;
+	color: white;
+	margin-bottom: 5px;
+	font-size: 1.6rem;
+	font-weight: bold;
+	text-align: left;
+	transition: all 0.1s ease-in-out;
+	cursor: pointer;
+}
+
+.addExerciseContainer:hover {
+}
+
+
+.button {
+    background: none;
+	color: white;
+	border-radius: 25% 25% 25% 25%;
+	font-size: 2rem;
+	margin: 0.5rem;
+	display: grid;
+	place-content: center;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    margin: auto;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.button:hover {
+	border: 1px solid rgb(50,200,50);
+    outline: none;
+}
+
+.button > svg {
+    transition: all .5s ease-in-out;
+}
+
+.button:hover > svg {
+    transform: rotate(180deg);
+    fill: rgb(50,200,50);
+}
+
+.button:focus {
+	border: 1px solid rgb(50,200,50);
+    outline: none;
+}
+
+.button:focus > svg {
+    transform: rotate(180deg);
+    fill: rgb(50,200,50);
+}
+

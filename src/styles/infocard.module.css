@@ -1,0 +1,43 @@
+
+
+.infoCardContainer {
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: grid;
+	align-content: flex-start;
+	text-align: center;
+}
+
+.infoCardContainer > div {
+	position: absolute;
+	bottom: 5%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+@media (max-height: 600px) {
+	.infoCardContainer {
+		display: none;
+	}
+}
+
+.loginButton {
+	width: 100%;
+	padding: 1rem;
+	border-radius: 1rem;
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: all 0.5s ease;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	text-align: center;
+
+}
+
+.loginButton:hover {
+	background-color: rgba(0, 0, 0, 0.3);
+	transform: scale(105%);
+	border: 1px solid rgba(255, 255, 255, 0.7);
+}
+

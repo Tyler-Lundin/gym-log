@@ -1,0 +1,28 @@
+
+
+.seeYaContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.seeYaContainer > button {
+    color: white;
+    border: 1px solid transparent;
+    background: none;
+    padding: 1rem;
+    font-size: 2rem;
+    transition: all 0.2s ease-in-out;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.seeYaContainer > button:hover {
+    border-radius: 0 1rem 1rem 1rem;
+    border: 1px solid rgba(255,255,255,0.5);
+}

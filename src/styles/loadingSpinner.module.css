@@ -1,0 +1,21 @@
+
+.loadingSpinner {
+	height: 75px;
+	width: 75px;
+	border-radius: 100%;
+	border: 6px solid white;
+	border-top: 6px solid gray;
+	animation: spin 750ms linear infinite;
+	margin: auto;
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

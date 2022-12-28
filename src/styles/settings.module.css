@@ -1,0 +1,140 @@
+.backButton {
+    border: 1px solid transparent;
+    outline: none;
+}
+
+.backButton:hover {
+    border: 1px solid rgb(50,150,250);
+    outline: none;
+}
+
+.backButton:focus {
+    border: 1px solid rgb(50,150,250);
+    outline: none;
+}
+
+.backButton:focus > svg {
+    fill: rgb(50,150,250);
+}
+
+.backButton > svg {
+    transition: all 0.3s ease-in-out;
+}
+
+.toggleSettingsButton {
+	border: none;
+	outline: none;
+	display: grid;
+	place-content: center;
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+	width: 45px;
+	height: 45px;
+	background: none;
+	cursor: pointer;
+	z-index: 100;
+	transition: all 0.2s ease-in-out;
+}
+
+.toggleSettingsButton:hover {
+    border: 1px solid rgb(50,150,250);
+    outline: none;
+}
+
+.toggleSettingsButton:focus {
+    border: 1px solid rgb(50,150,250);
+    outline: none;
+}
+
+.toggleSettingsButton > svg {
+    transition: all 0.3s ease-in-out;
+}
+
+.toggleSettingsButton:hover > svg {
+    fill: rgb(50,150,250);
+    transform: rotate(360deg);
+}
+
+.toggleSettingsButton:focus > svg {
+    fill: rgb(50,150,250);
+    transform: rotate(90deg);
+}
+
+
+.settingsContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+	width: 100%;
+	height: 100%;
+    display: grid;
+    place-content: center;
+	background-color: rgba(50,50,50,1);
+    backdrop-filter: blur(6px);
+    z-index: 30;
+    padding: 10rem;
+    box-sizing: border-box;
+    animation: fadeIn 250ms forwards ease-in-out;
+}
+
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+
+.settingsContainer > button {
+	border: none;
+	outline: none;
+	cursor: pointer;
+	background: none;
+	border-radius: 0 .5rem .5rem .5rem;
+	padding: 1rem 2rem;
+	width: fit-content;
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	box-sizing: border-box;
+	transition: all 250ms ease-in-out;
+}
+
+
+.settingsContainer > button:hover {
+	background: rgba(100,200,100,.75);
+}
+
+
+.setting {
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        gap: 1rem;
+        border: 1px solid silver;
+        border-radius: 0 1rem 1rem 1rem;
+        padding: 1rem;
+}
+
+.setting > select {
+  border: none;
+  padding: 1rem;
+  font-size: 2rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 0 .5rem .5rem .5rem;
+  color: white;
+}
+
+
+.setting > label {
+        font-size: 1.5rem;
+        padding: 1rem;
+        text-transform: lowercase;
+        border-bottom: 1px solid silver;
+}
+
+

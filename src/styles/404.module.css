@@ -1,0 +1,11 @@
+
+.container {
+    color: white;
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+
+.container > button {
+    color: white;
+}
