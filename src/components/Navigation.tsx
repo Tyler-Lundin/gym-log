@@ -8,6 +8,8 @@ import { useEffect } from "react";
 
 const useNavigation = () => {
 	const { isNavOpen } = useAppSelector((state) => state.app);
+    const { theme } = useAppSelector((state) => state.app.settings);
+    const { color } = theme;
 	const dispatch = useAppDispatch();
 
 	const open = () => dispatch(openNav());
@@ -15,7 +17,7 @@ const useNavigation = () => {
 
 	const openButton = () => (
 		<button onClick={open} className={styles.navOpenButton}>
-			<RiMenuLine strokeWidth={0} size={40} color="white" />
+			<RiMenuLine strokeWidth={0} size={40} color={color}  />
 		</button>
 	);
 
@@ -25,7 +27,7 @@ const useNavigation = () => {
 			onClick={close}
 			className={styles.navClose}
 		>
-			<RiCloseFill size={40} color="white" />
+			<RiCloseFill size={40} color={color}/>
 		</button>
 	);
 

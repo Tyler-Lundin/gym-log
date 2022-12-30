@@ -15,10 +15,12 @@
 }
 
 .addExerciseContainer {
-	width: 100%;
-    height: 100%;
-    align-content: center;
+	width: 100vw;
+    height: fit-content;
+    align-content: top;
 	display: grid;
+    position: absolute;
+    left: 0;
 }
 .addExerciseForm {
     width: 100%;
@@ -53,16 +55,16 @@
     border: none;
     border-top: 1px solid rgba(255,255,255,0.3);
     border-bottom: 1px solid rgba(255,255,255,0.3);
-	color: white;
     font-weight: bold;
     text-align: center;
     transition: all 0.2s ease-in-out;
+    color: inherit;
 }
 
 .addExerciseContainer > form input:focus {
     outline: none;
-    border-bottom: 1px solid rgb(50,200,50);
-    border-top: 1px solid rgb(50,200,50);
+    border-top: 1px solid rgba(255,255,255,0.75);
+    border-bottom: 1px solid rgba(255,255,255,0.75);
 }
 
 .addExerciseContainer > form label {
@@ -79,42 +81,41 @@
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    box-sizing: border-box;
+	padding: 1rem;
 }
 
 .formStepButtons button {
-	color: white;
 	background: none;
-	padding: 1rem;
 	font-size: 2rem;
 	transition: all 0.2s ease-in-out;
+    padding: .5rem;
+    border: 1px solid transparent;
 }
 
 .nextButton {
     justify-self: right;
+    color: inherit;
+    border-radius: 1rem 0 1rem 1rem;
 }
 
 .backButton {
     justify-self: left;
+    color: inherit;
+    border-radius: 0 1rem 1rem 1rem;
 }
 
 .nextButton:focus {
     outline: none;
     color: rgb(50,200,50);
-    border-top: 1px solid rgb(50,200,50);
-    border-bottom: 1px solid rgb(50,200,50);
+    border: 1px solid rgb(50,200,50);
 }
 
 .backButton:focus {
     outline: none;
     color: rgb(50,200,50);
-    border-top: 1px solid rgb(50,200,50);
-    border-bottom: 1px solid rgb(50,200,50);
+    border: 1px solid rgb(50,200,50);
 }
 
-.buttonGroup {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
 
 

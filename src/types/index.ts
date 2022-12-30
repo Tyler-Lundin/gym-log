@@ -1,3 +1,14 @@
+export type H = {
+    [header: string]: string;
+};
+
+export type R = {
+    [key: string]: any;
+    message: string;
+    isError: boolean;
+    isLoading: boolean;
+};
+
 
 type Document = {
     _id: string;
@@ -10,7 +21,7 @@ export interface User extends Document {
     email: string;
     password: string;
     sessionId: string; // rotates every time user logs in
-    years: string[];
+    days: string[]; // array of day ids
     settings: {
         theme: string;
         language: 'english' | 'spanish' | 'french'
@@ -19,34 +30,10 @@ export interface User extends Document {
     assessments: string[];
 }
 
-export interface Year extends Document {
-    year: number;
-    userId: string;
-    months: string[];
-    stats: Stats
-}
-
-export interface Month extends Document {
-    month: number;
-    yearId: string;
-    userId: string;
-    weeks: string[];
-    stats: Stats
-}
-
-export interface Week extends Document {
-    week: number;
-    monthId: string;
-    userId: string;
-    days: string[];
-    stats: Stats
-}
-
 export interface Day extends Document {
-    day: number;
-    weekId: string;
+    date: string;
     userId: string;
-    events: [string];
+    exercises: [string];
     stats: Stats
 }
 
@@ -71,12 +58,14 @@ export interface Stats {
         [exercise: string]: {
             totalReps: number;
             totalWeight: number;
-            averageReps: number;
-            averageWeight: number;
+            totalSets: number;
         }
     };
     tags: {
-        [label: string]: number;
+        [tag: string]: {
+            tagCount: number;
+            tagLocation: string;
+        }
     };
 }
 

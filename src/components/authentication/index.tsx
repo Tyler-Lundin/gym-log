@@ -17,12 +17,11 @@ const useAuthentication = () => {
 	const handleClick = () => {
         if (pathname === '/auth/login') navTo('/auth/register');
         if (pathname === '/auth/register') navTo('/auth/login');
+        if (pathname === '/auth/forgot') navTo('/auth/login');
 	};
 
-	const label = pathname === '/auth/register' ? 'Login' : 'Register';
+	const label = pathname === '/auth/register' || pathname === '/auth/forgot' ? 'Login' : 'Register';
 
-	const renderTitle = () =>
-		pathname === '/auth/login' ? <h2>Login</h2> : <h2>Register</h2>;
 
 
 	const renderError = () => {
@@ -42,7 +41,6 @@ const useAuthentication = () => {
 		handleClick,
 		isLoading,
 		isError,
-		renderTitle,
 		renderError,
 	};
 };
@@ -53,7 +51,6 @@ const Authentication = () => {
 		handleClick,
 		isLoading,
 		isError,
-		renderTitle,
 		renderError,
 	} = useAuthentication();
 
@@ -62,12 +59,15 @@ const Authentication = () => {
 			<InfoCard />
 			<div id="authentication-container" className={`${isError ? styles.shake : ''} ${styles.authContainer}`}>
 				{ renderError() }
-				{ renderTitle() }
                 { isLoading ? <LoadingSpinner /> :  <Outlet /> }
-				<span className={styles.or}>or</span>
-				<button disabled={isLoading} onClick={handleClick}>
-					{label}
-			</button>
+				{ !isLoading && (
+                    <>
+                        <span className={styles.or}>or</span>
+				        <button disabled={isLoading} onClick={handleClick}>
+					        {label}
+			            </button>
+                    </>
+                )}
 			</div>
 		</div>
 	);

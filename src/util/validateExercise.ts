@@ -1,9 +1,8 @@
 import { Exercise } from "../types";
 
-const validateExercise = (Exercise: Partial<Exercise>) => {
+const validateExercise = (Exercise: { [key:string]: any }) => {
     const errs: string[] = [];
     let { dayId, time, tags, weight, reps, exercise } = Exercise;
-
     if ( !dayId ) errs.push('dayId');
     if ( !time ) errs.push('time');
     if ( !exercise ) errs.push('exercise');

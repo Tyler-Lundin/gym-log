@@ -1,20 +1,31 @@
 .backButton {
     border: 1px solid transparent;
-    outline: none;
+    padding: 0.5rem;
+	outline: none;
+	cursor: pointer;
+	background: none;
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0rem 1rem 1rem 1rem;
 }
 
 .backButton:hover {
-    border: 1px solid rgb(50,150,250);
+    background: white;
+    border: 1px solid white;
     outline: none;
 }
 
 .backButton:focus {
-    border: 1px solid rgb(50,150,250);
+    background: white;
+    border: 1px solid white;
     outline: none;
 }
 
 .backButton:focus > svg {
-    fill: rgb(50,150,250);
+    fill: black;
 }
 
 .backButton > svg {
@@ -35,16 +46,19 @@
 	cursor: pointer;
 	z-index: 100;
 	transition: all 0.2s ease-in-out;
+    border-radius: 1rem 1rem 0rem 1rem;
 }
 
 .toggleSettingsButton:hover {
     border: 1px solid rgb(50,150,250);
     outline: none;
+    transform: scale(1.2);
 }
 
 .toggleSettingsButton:focus {
     border: 1px solid rgb(50,150,250);
     outline: none;
+    transform: scale(1.2);
 }
 
 .toggleSettingsButton > svg {
@@ -53,12 +67,12 @@
 
 .toggleSettingsButton:hover > svg {
     fill: rgb(50,150,250);
-    transform: rotate(360deg);
+    transform: rotate(180deg);
 }
 
 .toggleSettingsButton:focus > svg {
     fill: rgb(50,150,250);
-    transform: rotate(90deg);
+    transform: rotate(180deg);
 }
 
 
@@ -70,7 +84,7 @@
 	height: 100%;
     display: grid;
     place-content: center;
-	background-color: rgba(50,50,50,1);
+	background-color: rgb(50,150,250);
     backdrop-filter: blur(6px);
     z-index: 30;
     padding: 10rem;
@@ -86,27 +100,6 @@
 	100% {
 		opacity: 1;
 	}
-}
-
-
-.settingsContainer > button {
-	border: none;
-	outline: none;
-	cursor: pointer;
-	background: none;
-	border-radius: 0 .5rem .5rem .5rem;
-	padding: 1rem 2rem;
-	width: fit-content;
-	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	box-sizing: border-box;
-	transition: all 250ms ease-in-out;
-}
-
-
-.settingsContainer > button:hover {
-	background: rgba(100,200,100,.75);
 }
 
 

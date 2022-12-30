@@ -1,0 +1,16 @@
+
+.exerciseContainer {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(150,150,150,0.3);
+}
+
+.tagsContainer {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}

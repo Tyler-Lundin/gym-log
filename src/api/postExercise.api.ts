@@ -1,5 +1,6 @@
 import axiosInstance from "../configs/axios.config"
 import validateExercise from "../util/validateExercise";
+import { R } from '../types';
 
 type exercisePayload = {
     dayId: string,
@@ -10,19 +11,17 @@ type exercisePayload = {
     reps: number | string;
 }
 
-const PostExercise = async (exercise: exercisePayload, headers:{[key:string]:string}, ) => {
-    if (!headers.authorization || !headers.session) return;
+const PostExercise = async (exercise: exercisePayload, headers:{[key:string]:string}):Promise<R> => {
+    if (!headers.authorization || !headers.session) return { message: 'No authorization headers', isError: true, isLoading: false };
 
     const newExercise = validateExercise(exercise);
-    console.log('newExercise', newExercise);
-    if (!newExercise) return;
+    if (!newExercise) return { message: 'Invalid exercise', isError: true, isLoading: false };
 
     try {
-        const response = await axiosInstance.post('/api/exercise', newExercise, { headers })
-        return response
+        const response = await axiosInstance.post('/api/exercise', { exercise: newExercise }, { headers })
+        return { message: response.data.message, isError: false, isLoading: false, exercise: response.data.exercise };
     } catch (error:any) {
-        console.log( error.response.data.message );
-        return 'error creating exercise - PostExercise.api line 24';
+        return { message: error.response.data.message, isError: true, isLoading: false };
     }
 }
 

@@ -10,6 +10,7 @@ import { MouseEvent } from 'react';
 const Register = () => {
 	const { formData } = useAppSelector(selectAuth);
 	const { email, verifyEmail, password, verifyPassword } = formData;
+    const { theme } = useAppSelector(state=>state.app.settings);
 
 	const dispatch = useAppDispatch();
 
@@ -36,7 +37,7 @@ const Register = () => {
 				<label htmlFor="verify-password">Verify Password</label>
 				<input value={verifyPassword} onChange={(e)=>dispatch(setVerifyPassword(e.target.value))} type="password" name="verify-password" id="verify-password" />
 			</div>
-			<button type="submit" onClick={handleClick}>Register</button>
+			<button type="submit" className={theme.color === 'black' ? styles.blackButton : styles.whiteButton } onClick={handleClick}>Register</button>
 		</form>
 	)
 };

@@ -1,6 +1,6 @@
 import styles from "./styles/app.module.css";
 import { useLocation, useNavigate, useRoutes } from "react-router-dom";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/Dashboard";
 import InfoCard from "./components/InfoCard";
 import Authentication from "./components/authentication";
 import { createGlobalStyle } from "styled-components";
@@ -12,10 +12,14 @@ import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import useAuth from "./hooks/useAuth";
 import { useEffect } from "react";
+import ForgotPassword from "./components/authentication/ForgotPassword";
 
 // const GlobalStyle = ({ color, softColor, borderColor, a, b, c, d, e, }
 
 const GlobalStyle = createGlobalStyle<Theme>`
+:root {
+    color: ${(props) => props.color};
+}
 a {
 	color: ${(p)=>p.e};
 }
@@ -46,7 +50,7 @@ function App() {
 
 
     useEffect(() => {
-        if ( !isAuth && pathname !== '/auth/login' && pathname !== '/auth/register' ) navTo('/auth/login');
+        if ( !isAuth && pathname === '/' ) navTo('/auth/login');
     }, [isAuth, pathname, navTo]);
 
 	const router = useRoutes([
@@ -65,6 +69,10 @@ function App() {
                 {
                     path: '/auth/register',
                     element: <Register />
+                },
+                {
+                    path: '/auth/forgot',
+                    element: <ForgotPassword />
                 },
             ]
         },

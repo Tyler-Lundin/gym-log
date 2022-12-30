@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PostExercise from "../../api/postExercise.api";
+import { useDayId } from "../../hooks";
 import useAuth from "../../hooks/useAuth";
 import useTime from "../../hooks/useTime";
 import styles from '../../styles/addExercise.module.css';
@@ -7,6 +8,8 @@ import styles from '../../styles/addExercise.module.css';
 export const AddExercise = ({ cancel }: { cancel: () => void }) => {
     const { headers } = useAuth();
     const { timeNoSeconds } = useTime();
+    const dayId = useDayId();
+
 	const [exerciseForm, setExerciseForm] = useState({
 		exercise: '',
 		weight: '',
@@ -26,7 +29,7 @@ export const AddExercise = ({ cancel }: { cancel: () => void }) => {
         if ( step === 0 && exercise.length <= 0) return
         if (step === formSteps.length - 1) {
             const newExercise = {
-                dayId: '',
+                dayId,
                 time: timeNoSeconds(),
                 exercise,
                 weight,
@@ -51,15 +54,15 @@ export const AddExercise = ({ cancel }: { cancel: () => void }) => {
 
     const formSteps = [
         {
-            label: 'What exercise did you do?',
+            label: 'exercise?',
             input: <input autoFocus onKeyDown={handleKeyDown} type="text" value={exercise} onChange={(e) => setExerciseForm({...exerciseForm, exercise: e.target.value})} />
         },
         {
-            label: 'How much weight did you use?',
+            label: 'weight?',
             input: <input autoFocus onKeyDown={handleKeyDown} type="number" value={weight} onChange={(e)=>setExerciseForm({ ...exerciseForm, weight: e.target.value})} />
         },
         {
-            label: 'How many reps did you do?',
+            label: 'reps?',
             input: <input autoFocus onKeyDown={handleKeyDown} type="number" value={reps} onChange={(e)=>setExerciseForm({ ...exerciseForm, reps: e.target.value})} />
         },
     ]
@@ -69,15 +72,8 @@ export const AddExercise = ({ cancel }: { cancel: () => void }) => {
 		<div className={styles.addExerciseContainer}>
 			<form className={styles.addExerciseForm}>
                 <div className={styles.formStepButtons}>
-
-                    <div className={styles.buttonGroup}>
                         <button className={styles.backButton} onClick={handleBack}>Back</button>
-                        <kbd>Esc</kbd>
-                    </div>
-                    <div className={styles.buttonGroup}>
                         <button className={styles.nextButton} onClick={handleNext}> Next </button>
-                        <kbd>Enter</kbd>
-                    </div>
                 </div>
 
                 <h2>{formSteps[step].label}</h2>

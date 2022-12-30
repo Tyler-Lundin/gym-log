@@ -1,15 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userSlice from './user.slice';
 import authSlice from './auth.slice';
-//import daySlice from './day.slice';
+import daySlice from './day.slice';
 import appSlice from './app.slice';
+import exerciseSlice from './exercise.slice';
 
 export const store = configureStore({
   reducer: {
 	  user: userSlice,
 	  auth: authSlice,
-//	  day: daySlice,
+	  day: daySlice,
 	  app: appSlice,
+      exercise: exerciseSlice,
   },
 })
 

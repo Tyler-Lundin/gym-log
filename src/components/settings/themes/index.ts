@@ -49,14 +49,14 @@ const fire = {
 
 const water = {
 	name: 'water',
-	color: 'black',
+	color: 'white',
 	softColor: 'rgba(0,0,0,0.5)',
 	borderColor: 'rgba(0,0,255,0.2)',
-	a: 'rgb(50,50,150)',
-	b: 'rgb(40,40,140)',
-	c: 'rgb(30,30,130)',
-	d: 'rgb(20,20,120)',
-	e: 'rgb(10,10,110)',
+	a: 'rgb(50,80,200)',
+	b: 'rgb(40,70,180)',
+	c: 'rgb(30,60,160)',
+	d: 'rgb(20,50,140)',
+	e: 'rgb(10,40,120)',
 }
 
 const grass = {
