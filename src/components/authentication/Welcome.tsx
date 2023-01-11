@@ -1,8 +1,7 @@
-import styles from "../styles/infocard.module.css";
+import styles from "../../styles/infocard.module.css";
 
 
-const Hero = () => {
-
+const Welcome = () => {
 
 	return (
 		<div id='info-card-container' className={styles.infoCardContainer}>
@@ -21,4 +20,4 @@ const Hero = () => {
 	);
 };
 
-export default Hero;
+export default Welcome;

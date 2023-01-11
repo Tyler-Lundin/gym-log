@@ -1,45 +1,16 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setNewTagColor, setNewTagLabel } from '../../store/exercise.slice';
-import styles from '../../styles/tagThemePicker.module.css';
-import { dark, light, fire, water, grass, electric, ice, poison, ground, Theme } from '../settings/themes/index';
+import useTagThemePicker from '../../hooks/useTagThemePicker';
 
 const TagThemePicker = () => {
 
-    const dispatch = useAppDispatch();
-
-    const setTagColor = (e: any) => { e.preventDefault(); dispatch( setNewTagColor(e.target.value) ); }
-
-    const tagThemes = [
-        dark,
-        light,
-        fire,
-        water,
-        grass,
-        electric,
-        ice,
-        poison,
-        ground,
-    ];
-
-    const k = (i:any, l: string) => ( `${i}-${l}` );
-
-    const Z = {
-        className: styles.colorSelector,
-        onClick: setTagColor,
-    }
-
-
-    useEffect(() => { dispatch( setNewTagColor( tagThemes[0].c ) ) }, []);
+    const { buttonProps, key, styles, tagThemes } = useTagThemePicker();
 
     return (
         <div className={styles.tagThemePickerContainer}>
             {tagThemes.map((theme, i) => (
                 <div key={`themePicker${i}`} className={styles.palette}>
-                    <button value={theme.c} key={k(i, 'c')} {...Z} style={{backgroundColor: theme.c}} />
-                    <button value={theme.d} key={k(i, 'd')} {...Z} style={{backgroundColor: theme.d}} />
-                    <button value={theme.e} key={k(i, 'e')} {...Z} style={{backgroundColor: theme.e}} />
-                    <h2>{theme.name}</h2>
+                    <button value={theme.name} key={key(i, 'a')} {...buttonProps} style={{backgroundColor: theme.a}}>
+                        <h2 style={{color:theme.color}}>{theme.name}</h2>
+                    </button>
                 </div>
             ))}
         </div>

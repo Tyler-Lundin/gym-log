@@ -1,7 +1,7 @@
 import styles from "./styles/app.module.css";
 import { useLocation, useNavigate, useRoutes } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
-import InfoCard from "./components/Hero";
+import Dashboard from "./components/dashboard/";
+import InfoCard from "./components/authentication/Welcome";
 import Authentication from "./components/authentication";
 import { createGlobalStyle } from "styled-components";
 import { Theme } from "./components/settings/themes";
@@ -16,29 +16,25 @@ import ForgotPassword from "./components/authentication/ForgotPassword";
 
 
 const GlobalStyle = createGlobalStyle<Theme>`
-:root {
-    color: ${(props) => props.color};
-}
-a {
-	color: ${(p)=>p.e};
-}
-a:hover {
-  color: ${(p)=>p.d};
-}
-body {
-  background-color: ${(p)=>p.a};
-  }
-button {
-  border: 1px solid transparent;
-  background-color: ${(p)=>p.b};
-}
-button:hover {
-  border-color: ${(p)=>p.e};
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+    :root {
+        color: ${(props) => props.color};
+    }
+    a {
+	    color: ${(p)=>p.e};
+    }
+    a:hover {
+        color: ${(p)=>p.d};
+    }
+    body {
+        background-color: ${(p)=>p.a};
+    }
+    button {
+        border: 1px solid transparent;
+        background-color: ${(p)=>p.b};
+    }
+    button:focus, button:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
 `;
 
 function App() {

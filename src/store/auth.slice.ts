@@ -10,6 +10,7 @@ const initialState = {
 		verifyEmail: '',
 		password: '',
 		verifyPassword: '',
+        rememberMe: false,
 	},
     headers: {
         authorization: '',
@@ -27,42 +28,19 @@ export const authSlice = createSlice({
 	initialState,
 	reducers: {
         resetAuth: () => initialState,
-        setUsername: (state, action) => {
-            state.formData.username = action.payload;
-        },
-		setEmail: (state, action) => {
-			state.formData.email = action.payload;
-		},
-		setVerifyEmail: (state, action) => {
-			state.formData.verifyEmail = action.payload;
-		},
-		setPassword: (state, action) => {
-			state.formData.password = action.payload;
-		},
-		setVerifyPassword: (state, action) => {
-			state.formData.verifyPassword = action.payload;
-		},
-		clearError: (state) => {
-			state.isError = false;
-		},
-        clearRedirect: (state) => {
-            state.redirect = '';
-        },
-        clearMessage: (state) => {
-            state.message = '';
-        },
-		resetForm: (state) => {
-			state.formData = initialState.formData;
-		},
-        setMessage: (state, action) => {
-            state.message = action.payload;
-        },
-        resetLoading: (state) => {
-            state.isLoading = false;
-        },
-        setErrorMessage: (state, action) => {
-            state.message = action.payload;
-            state.isError = true;
+        setUsername: (state, action) => { state.formData.username = action.payload; },
+		setEmail: (state, action) => { state.formData.email = action.payload; },
+		setVerifyEmail: (state, action) => { state.formData.verifyEmail = action.payload; },
+		setPassword: (state, action) => { state.formData.password = action.payload; },
+		setVerifyPassword: (state, action) => { state.formData.verifyPassword = action.payload; },
+        setRememberMe: (state, action) => { state.formData.rememberMe = action.payload },
+		clearError: (state) => { state.isError = false; },
+        clearRedirect: (state) => { state.redirect = ''; },
+        clearMessage: (state) => { state.message = ''; },
+		resetForm: (state) => { state.formData = initialState.formData; },
+        setMessage: (state, action) => { state.message = action.payload; },
+        resetLoading: (state) => { state.isLoading = false; },
+        setErrorMessage: (state, action) => { state.message = action.payload; state.isError = true;
         }
 	},
 	extraReducers: (builder) => {
@@ -113,12 +91,24 @@ export const authSlice = createSlice({
 	}
 });
 
-export const selectEmail = (state: RootState) => state.auth.formData.email;
-export const selectVerifyEmail = (state: RootState) => state.auth.formData.verifyEmail;
-export const selectPassword = (state: RootState) => state.auth.formData.password;
-export const selectVerifyPassword = (state: RootState) => state.auth.formData.verifyPassword;
+export const selectFormData = (state: RootState) => state.auth.formData;
 
 
-export const { resetLoading, resetAuth, setUsername, setEmail, setVerifyEmail, setPassword, setVerifyPassword, clearError, clearRedirect, clearMessage, resetForm, setMessage, setErrorMessage } = authSlice.actions;
+export const {
+    resetLoading,
+    resetAuth,
+    setUsername,
+    setEmail,
+    setVerifyEmail,
+    setPassword,
+    setVerifyPassword,
+    setRememberMe,
+    clearError,
+    clearRedirect,
+    clearMessage,
+    resetForm,
+    setMessage,
+    setErrorMessage
+} = authSlice.actions;
 
 export default authSlice.reducer;

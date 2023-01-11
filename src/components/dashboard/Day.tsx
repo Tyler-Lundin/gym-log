@@ -1,9 +1,8 @@
-
-import DateSlider from './date/DateSlider'
-import styles from '../styles/day.module.css';
-import Exercises from './exercise/Exercises';
-import AddExerciseContainer from './exercise/AddExerciseContainer';
-import useDay from '../hooks/useDay';
+import DateSlider from './DateSlider';
+import styles from '../../styles/day.module.css';
+import Exercises from '../exercise/Exercises';
+import AddExerciseContainer from '../exercise/AddExerciseContainer';
+import useDay from '../../hooks/useDay';
 
 
 const Day = () => {

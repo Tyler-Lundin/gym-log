@@ -1,0 +1,34 @@
+
+.closeButton {
+	display: grid;
+	background: none;
+	border: none;
+	place-content: center;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	width: 40px;
+	height: 40px;
+	z-index: 1;
+    transition: all 0.2s ease-in-out;
+    border-radius: 1rem 0rem 1rem 1rem;
+}
+
+.closeButton > svg {
+    fill: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.closeButton:hover, .closeButton:focus {
+    border: 1px solid rgb(200,50,50);
+    background: rgb(200,50,50);
+    outline: none;
+    transform: translate( -7px, 7px );
+}
+
+.closeButton:hover > svg, .closeButton:focus > svg {
+    transform: rotate(180deg);
+    fill: black;
+    stroke: "black";
+    stroke-width: "10";
+}

@@ -3,6 +3,7 @@ import axiosInstance from '../configs/axios.config';
 export type LoginPayload = {
 	email: string;
 	password: string;
+    rememberMe: boolean;
 };
 
 const Login = async ( payload:LoginPayload ) => {

@@ -1,4 +1,3 @@
-
 import useTheme from './useTheme';
 import { useAppDispatch, useAppSelector } from '.';
 import { setAddExerciseTagOpen } from "../store/app.slice";

@@ -18,12 +18,16 @@ export const loginThunk = createAsyncThunk<ResponsePayload, void, { state: RootS
             sessionToken: '',
             authToken: '',
         }
-
 		try {
 			const formData = thunkAPI.getState().auth.formData;
-			const { email, password } = formData;
-			const response = await Login({ email, password });
+			const { email, password, rememberMe } = formData;
+			const response = await Login({ email, password, rememberMe });
 			if (!response) return thunkAPI.rejectWithValue( payload );
+            if (rememberMe) {
+                const thirtyDaysFromNow = new Date();
+                thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+                localStorage.setItem('rememberMe', 'value=true; expires=' + thirtyDaysFromNow.toUTCString());
+            }
 			return response
 		} catch (error:any) {
             payload.message = error.response.data.message || 'Error Registering User';

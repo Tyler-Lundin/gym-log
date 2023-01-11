@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
-import styles from "../styles/navigation.module.css";
-import Settings from "./settings";
-import { RiCloseFill, RiMenuLine } from "react-icons/ri";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { closeNav, openNav } from "../store/app.slice";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import styles from "../../styles/navigation.module.css";
+import Settings from "../settings";
+import { RiMenuLine } from "react-icons/ri";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { closeNav, openNav } from "../../store/app.slice";
+import CloseButton from "../uxui/CloseButton";
 
 const useNavigation = () => {
 	const { isNavOpen } = useAppSelector((state) => state.app);
@@ -14,30 +15,23 @@ const useNavigation = () => {
 
     const isBlack = color === 'black';
 
-	const open = () => dispatch(openNav());
-	const close = () => dispatch(closeNav());
+	const open = (e:any) => { e.preventDefault(); dispatch(openNav()); };
+	const close = (e:any) => {e.preventDefault(); dispatch(closeNav());};
 
     const openClasses = [styles.navOpenButton, isBlack ? styles.blackOpenButton : styles.whiteOpenButton].join(' ');
+
 	const openButton = () => (
 		<button onClick={open} className={openClasses}>
 			<RiMenuLine strokeWidth={0} size={40} color={color}  />
 		</button>
 	);
 
-	const closeButton = () => (
-		<button
-			disabled={!isNavOpen}
-			onClick={close}
-			className={styles.navClose}
-		>
-			<RiCloseFill size={40} color={color}/>
-		</button>
-	);
+	const closeButton = () => <CloseButton onClick={close} disabled={!isNavOpen} className={styles.closeButton} />
 
     const handleKeyDown = (e:any) => {
         console.log('keydown')
         if (e.key === 'Escape') {
-            close();
+            close(e);
         }
     }
 

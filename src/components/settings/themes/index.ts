@@ -85,7 +85,7 @@ const electric = {
 
 const ice = {
 	name: 'ice',
-	color: 'black',
+	color: 'white',
 	softColor: 'rgba(0,0,0,0.5)',
 	borderColor: 'rgba(0,255,255,0.2)',
 	a: 'rgb(50,150,150)',
@@ -118,6 +118,18 @@ const ground = {
 	d: 'rgb(120,70,20)',
 	e: 'rgb(110,60,10)',
 }
+
+export const tagThemes = [
+    light,
+    dark,
+    fire,
+    water,
+    grass,
+    electric,
+    ice,
+    poison,
+    ground,
+]
 
 export {
 	light,

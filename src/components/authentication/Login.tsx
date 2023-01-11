@@ -1,5 +1,5 @@
 import styles from '../../styles/forms.module.css'
-import { selectEmail, selectPassword, setEmail, setErrorMessage, setPassword } from '../../store/auth.slice';
+import { selectFormData, setEmail, setErrorMessage, setPassword, setRememberMe } from '../../store/auth.slice';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {loginThunk} from '../../store/thunks/login.thunk';
 import {MouseEvent} from 'react';
@@ -8,8 +8,8 @@ import validateLogin from '../../util/validateLogin';
 
 
 const Login = () => {
-	const email = useAppSelector(selectEmail);
-	const password = useAppSelector(selectPassword);
+	const { email, password, rememberMe } = useAppSelector(selectFormData);
+
 	const dispatch = useAppDispatch();
     const { theme } = useAppSelector(state=>state.app.settings);
 
@@ -32,7 +32,7 @@ const Login = () => {
             <div className={styles.formOptions}>
                 <div className={styles.formOption}>
                     <label htmlFor="remember">Remember me</label>
-                    <input type="checkbox" name="remember" id="remember" />
+                    <input aria-checked={rememberMe} onChange={()=> dispatch(setRememberMe(!rememberMe))} type="checkbox" name="remember" id="remember" />
                 </div>
                 <div className={styles.formOption}>
                     <Link to='/auth/forgot'>Forgot password?</Link>

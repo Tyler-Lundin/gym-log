@@ -1,4 +1,4 @@
-import styles from '../styles/dashboard.module.css';
+import styles from '../../styles/dashboard.module.css';
 import Day from './Day';
 import Navigation from './Navigation';
 
