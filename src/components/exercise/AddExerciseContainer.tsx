@@ -1,8 +1,8 @@
-import styles from "../styles/addExerciseButton.module.css";
-import AddExercise from "./exercise/AddExercise";
+import styles from "../../styles/addExerciseButton.module.css";
+import AddExercise from "./AddExercise";
 import { AiOutlinePlus } from 'react-icons/ai';
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { closeAddExercise, openAddExercise } from "../store/app.slice";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { closeAddExercise, openAddExercise } from "../../store/app.slice";
 
 const useAddExerciseContainer = () => {
     const { isAddExerciseOpen: isOpen } = useAppSelector(state=>state.app);
@@ -22,7 +22,7 @@ const useAddExerciseContainer = () => {
 const AddExerciseContainer = () => {
 	const { cancel, open, isOpen, theme } = useAddExerciseContainer();
 
-	if ( isOpen ) return ( <AddExercise cancel={cancel} /> );
+	if ( isOpen ) return ( <AddExercise /> );
 
     return (
         <div className={styles.addExerciseContainer}>

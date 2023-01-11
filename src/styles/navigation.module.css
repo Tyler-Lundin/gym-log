@@ -9,32 +9,18 @@
 	animation: fadeIn 0.2s ease-in-out;
 }
 
-.navClose {
-	display: grid;
-	background: none;
-	border: none;
-	place-content: center;
-	position: absolute;
-	top: 1rem;
-	right: 1rem;
-	width: 40px;
-	height: 40px;
-	z-index: 1;
-}
 
 .nav {
 	color: white;
-	width: fit-content;
-	min-width: 300px;
+    width: 100vw;
 	height: 100vh;
 	position: absolute;
     background: black;
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
-	right: 0;
-        top: 0;
-        transform: translateX(100%);
-	transition: transform 0.3s ease-in-out;
+    top: 100%;
+	transition: all 0.3s ease-in-out;
+    z-index: 9999999;
 }
 
 .nav > ul {
@@ -64,7 +50,7 @@
 }
 
 .navOpen {
-	transform: translateX(0);
+    top: calc(100% - 100vh);
 }
 
 .navOpen > ul {
@@ -75,9 +61,9 @@
 	position: absolute;
 	width: fit-content;
 	height: fit-content;
-	top: 0;
-	right: 0;
-	padding: 10px;
+	bottom: 0;
+	left: 50%;
+    transform: translateX(-50%);
 	z-index: 100;
 	isolation: isolate;
 }
@@ -92,68 +78,78 @@
 	position: relative;
 	padding: 10px;
 	color: inherit;
-	border-radius: 1rem 0rem 1rem 1rem;
+	border-radius: 1rem 1rem 0 0;
 	border: 1px solid transparent;
-	transition: all 0.2s ease-in-out;
+	transition: all 250ms ease-in-out;
     overflow: hidden;
 }
 
-.navOpenButton:hover {
-	border: 1px solid rgb(50,200,50);
-}
-
-.navOpenButton:hover > svg {
-}
 
 .navOpenButton > svg {
-    transition: all 0.3s ease-in-out;
+    transition: all 250ms ease-in-out;
 }
 
-
-.navOpenButton:focus {
-	outline: none;
-	border: 1px solid rgb(50,200,50);
+.navOpenButton:focus, .navOpenButton:hover {
+    transform: translateY( -10px );
 }
 
+.navOpenButton:focus svg, .navOpenButton:hover svg {
+}
 
-.navOpenButton:focus > svg {
-    fill: rgb(50,200,50);
+.blackOpenButton:hover, .blackOpenButton:focus {
+    border: 1px solid black;
+    outline: none;
+    box-shadow: 0 50px 0 0 black;
+}
+
+.blackOpenButton:focus > svg, .blackOpenButton:hover > svg {
+    fill: black;
+}
+
+.whiteOpenButton:hover, .whiteOpenButton:focus {
+    border: 1px solid white;
+    outline: none;
+    box-shadow: 0 50px 0 0 silver;
+}
+
+.whiteOpenButton:focus > svg, .whiteOpenButton:hover > svg {
+    fill: white;
 }
 
 .navClose {
+	display: grid;
+	background: none;
+	border: none;
+	place-content: center;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	width: 40px;
+	height: 40px;
+	z-index: 1;
     transition: all 0.2s ease-in-out;
     border-radius: 1rem 0rem 1rem 1rem;
 }
 
 .navClose > svg {
     fill: white;
-}
-
-.navClose:hover {
-    border: 1px solid rgb(200,50,50);
-    outline: none;
-    transform: scale(1.2);
-}
-
-.navClose:focus {
-    border: 1px solid rgb(200,50,50);
-    outline: none;
-    transform: scale(1.2);
-}
-
-.navClose > svg {
     transition: all 0.3s ease-in-out;
 }
 
-.navClose:hover > svg {
-    transform: rotate(180deg);
-    fill: rgb(200,50,50);
+.navClose:hover, .navClose:focus {
+    border: 1px solid rgb(200,50,50);
+    background: rgb(200,50,50);
+    outline: none;
+    transform: translate( -7px, 7px );
 }
 
-.navClose:focus > svg {
+.navClose:hover > svg, .navClose:focus > svg {
     transform: rotate(180deg);
-    fill: rgb(200,50,50);
+    fill: black;
+    stroke: "black";
+    stroke-width: "10";
 }
+
 
 @keyframes fadeIn {
 	0% {

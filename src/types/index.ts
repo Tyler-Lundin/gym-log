@@ -1,5 +1,6 @@
 export type H = {
-    [header: string]: string;
+    authorization: string;
+    session: string;
 };
 
 export type R = {
@@ -17,43 +18,47 @@ type Document = {
     updatedAt: string;
 }
 
-export interface User extends Document {
+export interface IUser extends Document {
+    username: string;
     email: string;
     password: string;
     sessionId: string; // rotates every time user logs in
     days: string[]; // array of day ids
+    friends: string[]; // array of user ids
+    friendRequests: string[]; // array of user ids
+    friendCode: string; // unique code to add friends
     settings: {
         theme: string;
         language: 'english' | 'spanish' | 'french'
     }
-    stats: Stats;
+    stats: IStats;
     assessments: string[];
 }
 
-export interface Day extends Document {
+export interface IDay extends Document {
     date: string;
     userId: string;
     exercises: [string];
-    stats: Stats
+    stats: IStats
 }
 
-export interface Exercise extends Document {
+export interface IExercise extends Document {
     dayId: string;
     userId: string;
     time: string; // 04:00 (military)
-    tags: Tag[];
+    tags: ITag[];
     exercise: string;
     weight: number;
     reps: number;
 }
 
 
-export interface Tag {
+export interface ITag {
     label: string;
     color: string;
 }
 
-export interface Stats {
+export interface IStats {
     exercises: {
         [exercise: string]: {
             totalReps: number;
@@ -64,12 +69,20 @@ export interface Stats {
     tags: {
         [tag: string]: {
             tagCount: number;
-            tagLocation: string;
+            tagLocations: string;
         }
     };
 }
 
-export interface InitialAssessment extends Document {
+export interface IFriendRequest extends Document {
+    from: string;
+    to: string;
+    status: 'pending' | 'accepted' | 'rejected';
+    message: string;
+}
+
+
+export interface IInitialAssessment extends Document {
     userId: string;
     assessment: {
         age: number;

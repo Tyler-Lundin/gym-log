@@ -12,11 +12,14 @@ const useNavigation = () => {
     const { color } = theme;
 	const dispatch = useAppDispatch();
 
+    const isBlack = color === 'black';
+
 	const open = () => dispatch(openNav());
 	const close = () => dispatch(closeNav());
 
+    const openClasses = [styles.navOpenButton, isBlack ? styles.blackOpenButton : styles.whiteOpenButton].join(' ');
 	const openButton = () => (
-		<button onClick={open} className={styles.navOpenButton}>
+		<button onClick={open} className={openClasses}>
 			<RiMenuLine strokeWidth={0} size={40} color={color}  />
 		</button>
 	);
@@ -68,13 +71,15 @@ const Navigation = () => {
 			/>
 			<div id="navigation-container" className={styles.navContainer}>
 				{!isNavOpen && openButton()}
+			</div>
+
 				<nav
 					id="navigation-for-dashboard"
 					className={`${styles.nav} ${isNavOpen && styles.navOpen}`}
 				>
                 { isNavOpen && (
 						<>
-					{closeButton()}
+					        {closeButton()}
 							{isNavOpen && <Settings />}
 							<ul>
 								<li>
@@ -90,7 +95,6 @@ const Navigation = () => {
 						</>
                     )}
 				</nav>
-			</div>
 		</>
 	);
 };

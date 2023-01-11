@@ -1,17 +1,18 @@
 
-import DateSlider from './DateSlider'
+import DateSlider from './date/DateSlider'
 import styles from '../styles/day.module.css';
-import Exercises from './Exercises';
-import AddExerciseContainer from './AddExerciseContainer';
-import { useAppSelector } from '../hooks';
+import Exercises from './exercise/Exercises';
+import AddExerciseContainer from './exercise/AddExerciseContainer';
+import useDay from '../hooks/useDay';
+
 
 const Day = () => {
-    const { isAddExerciseOpen } = useAppSelector(state=>state.app);
+    const { day, dayId, month, year, isLoading, isError, isAddExerciseOpen } = useDay();
 
 	return (
 		<div className={styles.dayContainer} >
 
-			<DateSlider />
+			{!isAddExerciseOpen && <DateSlider /> }
 
 			<div id='exercises-container' className={styles.eventsContainer}>
                 { !isAddExerciseOpen && <Exercises /> }

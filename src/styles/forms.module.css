@@ -13,7 +13,7 @@
 }
 
 .formGroup > label {
-    color: white;
+    color: inherit;
 }
 
 .formGroup > input {
@@ -52,7 +52,7 @@
 }
 
 .whiteButton {
-    border:1px solid silver;
+    border: 1px solid silver;
     color: white;
 }
 
@@ -82,7 +82,7 @@
 
 .formOption {
     display: flex;
-    color: white;
+    color: inherit;
     font-size: 1.2rem;
     align-items: center;
     justify-content: center;

@@ -1,43 +1,32 @@
-import { useEffect, useState } from "react";
-import axiosInstance from "../configs/axios.config";
-import useAuth from "./useAuth";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from ".";
+import getDayThunk from "../store/thunks/getDay.thunk";
+import { closeAddExercise } from "../store/app.slice";
 
-export type exercisePayload = {
-    type: string;
-    time: string;
-    exercise: string;
-    weight: number | string;
-    reps: number | string;
-    tags: { label: string; color: string; }[];
-}
+const useDay = () => {
+    const dispatch = useAppDispatch();
+    const { date, isLoading, isError, dayId } = useAppSelector(state => state.day);
+    const { month, day, year } = date;
+    const { isAddExerciseOpen } = useAppSelector(state=>state.app);
+    const { exercises } = useAppSelector(state => state.exercise);
 
+    useEffect(()=>{
+        dispatch( getDayThunk());
+    },[month, day, year, exercises.length]);
 
+    useEffect(()=>{
+        if (isAddExerciseOpen) dispatch(closeAddExercise());
+    }, [exercises.length]);
 
-const useDay = ( date: { year: number; month: number; day: number; } ) => {
-    const [day, setDay] = useState<exercisePayload[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string>('');
-    const [refresh, setRefresh] = useState<boolean>(false);
-
-    const { headers } = useAuth();
-
-    const getDay = async () => {
-        setLoading(true);
-        try {
-            const response = await axiosInstance.get(`/api/${date.year}/${date.month}/${date.day}`, { headers });
-            setDay(response.data);
-            setLoading(false);
-        } catch (error:any) {
-            setError(error.response.data.message);
-            setLoading(false);
-        }
-    }
-
-    useEffect(() => {
-        getDay();
-    }, [refresh]);
-
-    return { day, loading, error, getDay, setRefresh };
-}
+    return {
+        day,
+        dayId,
+        month,
+        year,
+        isLoading,
+        isError,
+        isAddExerciseOpen,
+    };
+};
 
 export default useDay;

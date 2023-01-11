@@ -1,7 +1,7 @@
 import styles from "../styles/infocard.module.css";
 
 
-const InfoCard = () => {
+const Hero = () => {
 
 
 	return (
@@ -21,4 +21,4 @@ const InfoCard = () => {
 	);
 };
 
-export default InfoCard;
+export default Hero;

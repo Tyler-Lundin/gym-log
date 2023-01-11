@@ -1,10 +1,18 @@
 
 .exerciseContainer {
     display: grid;
-    grid-template-columns: 1fr 6fr;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid rgba(150,150,150,0.3);
+    grid-template-columns: 4rem fit-content(100%) fit-content(100%);
+    justify-content: left;
+    padding: 1rem;
+    position: relative;
+}
+
+.black {
+    border-bottom: 1px solid rgb(30,30,30);
+}
+
+.white {
+    border-bottom: 1px solid silver;
 }
 
 .tagsContainer {
@@ -13,4 +21,46 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
+    margin-left: 2rem;
+    height: 100%;
 }
+
+.addTag {
+    display: grid;
+    place-content: center;
+    border-radius: 1rem 1rem 0 1rem;
+    width: 4rem;
+    padding: .5rem;
+    border-color: black;
+    border-size: 1px;
+    border-style: solid;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.addTag:hover, .addTag:focus {
+    background: black;
+    color: white;
+}
+
+
+.removeExercise {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 2rem;
+    padding: 0;
+    color: inherit;
+}
+
+.removeExercise:hover, .removeExercise:focus {
+    transform: translateY(-50%) scale(1.2);
+    outline: none;
+}
+

@@ -1,9 +1,10 @@
 import styles from '../../styles/forms.module.css'
-import { selectEmail, selectPassword, setEmail, setPassword } from '../../store/auth.slice';
+import { selectEmail, selectPassword, setEmail, setErrorMessage, setPassword } from '../../store/auth.slice';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {loginThunk} from '../../store/thunks/login.thunk';
 import {MouseEvent} from 'react';
 import { Link } from 'react-router-dom';
+import validateLogin from '../../util/validateLogin';
 
 
 const Login = () => {
@@ -14,13 +15,14 @@ const Login = () => {
 
 	const handleClick = (e:MouseEvent) => {
 		e.preventDefault();
-		dispatch(loginThunk());
+        if (!validateLogin(email, password)) return dispatch(setErrorMessage('Please enter a valid email or username, and password'));
+        dispatch(loginThunk());
 	}
 
 	return (
 		<form className={styles.form} >
 			<div className={styles.formGroup}>
-				<label htmlFor="email">Email</label>
+				<label htmlFor="email">Email or Username</label>
 				<input autoFocus value={email} onChange={(e)=>dispatch(setEmail(e.target.value))} type="email" name="email" id="email" />
 			</div>
 			<div className={styles.formGroup}>

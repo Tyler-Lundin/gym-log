@@ -1,10 +1,11 @@
 import styles from "../../styles/authentication.module.css";
-import InfoCard from "../InfoCard";
+import Hero from "../Hero";
 import useAuth from "../../hooks/useAuth";
-import LoadingSpinner from "../../components/LoadingSpinner";
+import LoadingSpinner from "../uxui/LoadingSpinner";
 import {useAppDispatch} from "../../hooks";
-import {clearError} from "../../store/auth.slice";
+import { clearError, resetLoading, setErrorMessage, setMessage } from "../../store/auth.slice";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 
 
@@ -26,15 +27,36 @@ const useAuthentication = () => {
 
 	const renderError = () => {
 		if (!isError) return null;
-		setTimeout(() => {
-			dispatch(clearError());
-		}, 3000);
 		return (
 			<div className={styles.errorContainer}>
 				<h2> { message || 'Error Logging In' } </h2>
 			</div>
 		);
 	};
+
+    useEffect(()=>{
+        const resetIfLoadingTooLong = () => {
+            if (isLoading) {
+                const timeout = setTimeout(()=>{
+                    dispatch(resetLoading());
+                    dispatch(setErrorMessage('Loading is taking longer than expected. Please check your internet connection and try again.'));
+                }, 10000);
+                console.log({timeout});
+                return () => clearTimeout(timeout);
+            }
+        };
+    }, [isLoading, isError]);
+
+    useEffect(()=>{
+        const handleErrorMessage = () => {
+            if (isError) {
+                setTimeout(()=>{
+                    dispatch(clearError());
+                }, 3666);
+            }
+        };
+        handleErrorMessage();
+    }, [isError]);
 
 	return {
 		label,
@@ -56,14 +78,14 @@ const Authentication = () => {
 
 	return (
 		<div id="authentication-background">
-			<InfoCard />
+			<Hero />
 			<div id="authentication-container" className={`${isError ? styles.shake : ''} ${styles.authContainer}`}>
 				{ renderError() }
                 { isLoading ? <LoadingSpinner /> :  <Outlet /> }
 				{ !isLoading && (
                     <>
                         <span className={styles.or}>or</span>
-				        <button disabled={isLoading} onClick={handleClick}>
+				        <button disabled={isLoading || isError} onClick={handleClick}>
 					        {label}
 			            </button>
                     </>

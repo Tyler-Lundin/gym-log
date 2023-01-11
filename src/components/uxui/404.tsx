@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import styles from '../styles/404.module.css';
+import styles from '../../styles/404.module.css';
 
 const FourZeroFour = () => {
 	const location = useLocation();

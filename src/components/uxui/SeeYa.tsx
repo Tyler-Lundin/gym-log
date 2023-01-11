@@ -1,5 +1,5 @@
-import useAuth from '../hooks/useAuth';
-import styles from '../styles/seeYa.module.css';
+import useAuth from '../../hooks/useAuth';
+import styles from '../../styles/seeYa.module.css';
 
 const SeeYa  = () => {
 

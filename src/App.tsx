@@ -1,20 +1,19 @@
 import styles from "./styles/app.module.css";
 import { useLocation, useNavigate, useRoutes } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
-import InfoCard from "./components/InfoCard";
+import InfoCard from "./components/Hero";
 import Authentication from "./components/authentication";
 import { createGlobalStyle } from "styled-components";
 import { Theme } from "./components/settings/themes";
 import useTheme from './hooks/useTheme';
-import FourZeroFour from './components/404';
-import SeeYa from './components/SeeYa';
+import FourZeroFour from './components/uxui/404';
+import SeeYa from './components/uxui/SeeYa';
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import useAuth from "./hooks/useAuth";
 import { useEffect } from "react";
 import ForgotPassword from "./components/authentication/ForgotPassword";
 
-// const GlobalStyle = ({ color, softColor, borderColor, a, b, c, d, e, }
 
 const GlobalStyle = createGlobalStyle<Theme>`
 :root {

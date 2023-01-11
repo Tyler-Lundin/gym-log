@@ -48,13 +48,14 @@
 }
 
 .shake {
-	animation: shake 1.5s;
+	animation: shake .8s;
 	animation-iteration-count: 1;
 }
 
 @keyframes shake {
 	0% {
 		transform: translate(-50%, -50%);
+        opacity: 1;
 	}
 	10% {
 		transform: translate(-50%, -50%) rotate(3deg);
@@ -70,6 +71,7 @@
 	}
 	50% {
 		transform: translate(-50%, -50%) rotate(3deg);
+        opacity: 0.5;
 	}
 	60% {
 		transform: translate(-50%, -50%) rotate(-3deg);
@@ -85,6 +87,7 @@
 	}
 	100% {
 		transform: translate(-50%, -50%);
+        opacity: 1;
 	}
 }
 
@@ -106,7 +109,7 @@
 .authContainer > button {
 	padding: 0.5rem;
 	background: none;
-	color: white;
+	color: inherit;
 	width: fit-content;
 	justify-self: center;
         text-transform: lowercase;

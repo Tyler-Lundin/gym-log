@@ -1,0 +1,51 @@
+
+
+.tagThemePickerContainer {
+    width: 100vw;
+    height: 300px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+
+.palette {
+    height: 80%;
+    display: flex;
+    width: 100vw;
+    max-width: 500px;
+    position: relative;
+    bottom: 0;
+    transform: translateY(20%);
+    text-align: center;
+}
+
+.palette h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    position: absolute;
+    left: 50%;
+}
+
+
+.colorSelector {
+    width: 170px;
+    height: 170px;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+}
+
+
+.colorSelector:hover, .colorSelector:focus {
+    transform: translateY(-10%);
+}

@@ -7,7 +7,7 @@
 	font-size: 1.6rem;
 	font-weight: bold;
 	text-align: left;
-	transition: all 0.1s ease-in-out;
+	transition: all 250ms ease-in-out;
 	cursor: pointer;
 }
 
@@ -18,13 +18,14 @@
 .button {
     background: none;
 	border-radius: 25% 25% 25% 25%;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	margin: 0.5rem;
 	display: grid;
 	place-content: center;
     margin: auto;
     transition: all 0.2s ease-in-out;
 }
+
 
 .black {
     border: 1px solid black;
@@ -38,29 +39,33 @@
     border-top: 1px solid transparent;
 }
 
-.button:hover {
-	border: 1px solid rgb(50,200,50);
+.black:hover, .black:focus {
+	border: 1px solid black;
     outline: none;
-    background: rgba(50,200,50,0.1);
+    background: black;
+    transform: rotate(180deg);
+}
+
+.black:hover > svg, .black:focus > svg {
+    fill: white;
+    transform: rotate(-360deg);
+}
+
+.white:hover, .white:focus {
+    border: 1px solid white;
+    outline: none;
+    background: white;
+    transform: rotate(180deg);
+}
+
+.white:hover > svg, .white:focus > svg {
+    fill: black;
+    transform: rotate(-360deg);
 }
 
 .button > svg {
-    transition: all .5s ease-in-out;
+    transition: all 250ms ease-in-out;
 }
 
-.button:hover > svg {
-    transform: rotate(180deg);
-    fill: rgb(50,200,50);
-}
 
-.button:focus {
-	border: 1px solid rgb(50,200,50);
-    outline: none;
-    background: rgba(50,200,50,0.1);
-}
-
-.button:focus > svg {
-    transform: rotate(180deg);
-    fill: rgb(50,200,50);
-}
 

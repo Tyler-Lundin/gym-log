@@ -12,21 +12,52 @@
     border-radius: 0rem 1rem 1rem 1rem;
 }
 
-.backButton:hover {
-    background: white;
-    border: 1px solid white;
+.blackBackButton {
+    border: 1px solid transparent;
+    padding: 0.5rem;
     outline: none;
+    cursor: pointer;
+    background: none;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0rem 1rem 1rem 1rem;
+    background-color: black;
+    color: white;
 }
 
-.backButton:focus {
-    background: white;
-    border: 1px solid white;
+.whiteBackButton {
+    border: 1px solid transparent;
+    padding: 0.5rem;
     outline: none;
+    cursor: pointer;
+    background: none;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0rem 1rem 1rem 1rem;
+    background-color: white;
+    color: black;
 }
 
-.backButton:focus > svg {
-    fill: black;
+.blackBackButton:hover, .blackBackButton:focus {
+    border: 1px solid black;
+    outline: none;
+    box-shadow: -7px -7px 0 0 white;
+    transform: translate( 7px, 7px );
 }
+
+.whiteBackButton:hover, .whiteBackButton:focus {
+    border: 1px solid black;
+    outline: none;
+    box-shadow: -7px -7px 0 0 black;
+    transform: translate(7px, 7px);
+}
+
 
 .backButton > svg {
     transition: all 0.3s ease-in-out;
@@ -49,29 +80,20 @@
     border-radius: 1rem 1rem 0rem 1rem;
 }
 
-.toggleSettingsButton:hover {
+.toggleSettingsButton:hover, .toggleSettingsButton:focus {
     border: 1px solid rgb(50,150,250);
+    background: rgb(50,150,250);
     outline: none;
-    transform: scale(1.2);
+    transform: translate( -7px, -7px );
 }
 
-.toggleSettingsButton:focus {
-    border: 1px solid rgb(50,150,250);
-    outline: none;
-    transform: scale(1.2);
-}
 
 .toggleSettingsButton > svg {
     transition: all 0.3s ease-in-out;
 }
 
-.toggleSettingsButton:hover > svg {
-    fill: rgb(50,150,250);
-    transform: rotate(180deg);
-}
-
-.toggleSettingsButton:focus > svg {
-    fill: rgb(50,150,250);
+.toggleSettingsButton:hover > svg, .toggleSettingsButton:focus > svg {
+    fill: black;
     transform: rotate(180deg);
 }
 
@@ -83,9 +105,8 @@
 	width: 100%;
 	height: 100%;
     display: grid;
+    gap: 2rem;
     place-content: center;
-	background-color: rgb(50,150,250);
-    backdrop-filter: blur(6px);
     z-index: 30;
     padding: 10rem;
     box-sizing: border-box;
@@ -108,18 +129,32 @@
         justify-items: center;
         align-items: center;
         gap: 1rem;
-        border: 1px solid silver;
         border-radius: 0 1rem 1rem 1rem;
         padding: 1rem;
+        border-size: 1px;
+        border-style: solid;
+        border-color: transparent;
+        background: rgba(0,0,0,0.2);
+}
+
+.black {
+    border-color: rgba(0,0,0,0.2);
+    color: black;
+}
+
+.white {
+    border-color: rgba(255,255,255,0.2);
+    color: white;
 }
 
 .setting > select {
   border: none;
   padding: 1rem;
   font-size: 2rem;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.2);
   border-radius: 0 .5rem .5rem .5rem;
-  color: white;
+  color: inherit;
+  transition: all 250ms ease-in-out;
 }
 
 
@@ -127,7 +162,13 @@
         font-size: 1.5rem;
         padding: 1rem;
         text-transform: lowercase;
-        border-bottom: 1px solid silver;
+
+}
+
+.setting > select:focus {
+    outline: none;
+    box-shadow: -7px -7px 0 0 rgba(0,0,0,0.4);
+    transform: translate(7px, 7px);
 }
 
 

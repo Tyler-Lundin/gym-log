@@ -1,6 +1,7 @@
 import axiosInstance from '../configs/axios.config';
 
 export type RegisterPayload = {
+    username: string;
 	email: string;
 	password: string;
 };

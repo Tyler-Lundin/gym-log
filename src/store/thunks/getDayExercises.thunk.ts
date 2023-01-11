@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Exercise } from '../../types';
+import { IExercise } from '../../types';
 import { RootState, AppDispatch } from '..';
 import getDayExercises from '../../api/getDayExercises.api';
 
@@ -8,7 +8,7 @@ type H = {
 };
 
 export type R = {
-    exercises: Exercise[] | [];
+    exercises: IExercise[] | [];
     message: string;
     isLoading: boolean;
     isError: boolean;
@@ -33,6 +33,7 @@ H,
         if (isError) return thunkAPI.rejectWithValue({ ...payload, message, isError: true } as R);
         return thunkAPI.fulfillWithValue({ ...payload, exercises, message } as R);
     } catch (error:any) {
+        console.log(error);
         return thunkAPI.rejectWithValue({ ...payload, message: error.message || 'Something went wrong fetching day exercises!', isError: true } as R);
     }
 });

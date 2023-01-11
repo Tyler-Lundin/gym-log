@@ -1,7 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getDayThunk from './thunks/getDay.thunk';
 
-const initialState = {
+export interface DayState {
+    dayId: string;
+    exercises: string[] | [];
+    date: {
+        month: number;
+        day: number;
+        year: number;
+    };
+    isLoading: boolean;
+    isError: boolean;
+    message: string ;
+};
+
+const initialState: DayState = {
     dayId: '',
     exercises: [] as string[] | [],
     date: {
@@ -29,15 +42,36 @@ const daySlice = createSlice({
         resetLoading: (state) => state = { ...state, isLoading: false },
         resetError: (state) => state = { ...state, isError: false },
         resetMessage: (state) => state = { ...state, message: '' },
+        setDate: (state, action) => {
+            state.date = action.payload;
+        },
+        tomorrow: (state) => {
+            const { month, day, year } = state.date;
+            const date = new Date(year, month - 1, day + 1);
+            state.date = {
+                month: date.getMonth() + 1,
+                day: date.getDate(),
+                year: date.getFullYear(),
+            };
+        },
+        yesterday: (state) => {
+            const { month, day, year } = state.date;
+            const date = new Date(year, month - 1, day - 1);
+            state.date = {
+                month: date.getMonth() + 1,
+                day: date.getDate(),
+                year: date.getFullYear(),
+            };
+        },
 	},
     extraReducers: (builder) => {
         builder.addCase(getDayThunk.fulfilled, (state, action) => {
-            const { dayId, exercises, message, isError, isLoading } = action.payload;
+            const { dayId, exercises, message } = action.payload;
             state.dayId = dayId;
             state.exercises = exercises;
             state.message = message;
-            state.isError = isError;
-            state.isLoading = isLoading;
+            state.isError = false;
+            state.isLoading = false;
 
         });
 
@@ -46,10 +80,10 @@ const daySlice = createSlice({
         });
 
         builder.addCase(getDayThunk.rejected, (state, action) => {
-            const { message = 'Error getting day!', isError = true, isLoading = false } = action.payload;
+            const { message } = action.payload;
             state.message = message;
-            state.isError = isError;
-            state.isLoading = isLoading;
+            state.isError = true;
+            state.isLoading = false;
         });
     },
 });
@@ -57,7 +91,7 @@ const daySlice = createSlice({
 export const selectEvents = (state: any) => state.day.events;
 export const selectDate = (state: any) => state.day.date;
 
-export const { reset, resetLoading, resetError, resetMessage } = daySlice.actions;
+export const { reset, resetLoading, resetError, resetMessage, setDate, tomorrow, yesterday } = daySlice.actions;
 
 export default daySlice.reducer;
 

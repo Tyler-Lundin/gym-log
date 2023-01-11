@@ -3,17 +3,18 @@ import {RootState} from '.';
 import {loginThunk} from './thunks/login.thunk';
 import registerThunk from './thunks/register.thunk';
 
-
-
 const initialState = {
 	formData: {
+        username: '',
 		email: '',
 		verifyEmail: '',
 		password: '',
 		verifyPassword: '',
 	},
-	authToken: '',
-	sessionToken: '',
+    headers: {
+        authorization: '',
+        session: '',
+    },
 	isAuth: false,
 	isLoading: false,
 	isError: false,
@@ -26,6 +27,9 @@ export const authSlice = createSlice({
 	initialState,
 	reducers: {
         resetAuth: () => initialState,
+        setUsername: (state, action) => {
+            state.formData.username = action.payload;
+        },
 		setEmail: (state, action) => {
 			state.formData.email = action.payload;
 		},
@@ -53,13 +57,23 @@ export const authSlice = createSlice({
         setMessage: (state, action) => {
             state.message = action.payload;
         },
+        resetLoading: (state) => {
+            state.isLoading = false;
+        },
+        setErrorMessage: (state, action) => {
+            state.message = action.payload;
+            state.isError = true;
+        }
 	},
 	extraReducers: (builder) => {
 		builder.addCase(loginThunk.fulfilled, (state, action) => {
 			const { authToken, sessionToken } = action.payload;
-			state.authToken = authToken;
-			state.sessionToken = sessionToken;
+            state.headers.authorization = `bearer ${authToken}`;
+            state.headers.session = `bearer ${sessionToken}`;
 			state.isAuth = true;
+            state.isLoading = false;
+            state.isError = false;
+            state.message = '';
 			state.formData = initialState.formData;
 		});
 
@@ -75,9 +89,13 @@ export const authSlice = createSlice({
 		});
 
         builder.addCase(registerThunk.fulfilled, (state, action) => {
-            const { message, redirect } = action.payload;
+            const { message, redirect, authToken, sessionToken } = action.payload;
             state.message = message;
             state.redirect = redirect;
+            state.headers.authorization = `bearer ${authToken}`;
+            state.headers.session = `bearer ${sessionToken}`;
+			state.isAuth = true;
+			state.formData = initialState.formData;
         });
 
         builder.addCase(registerThunk.pending, (state) => {
@@ -101,6 +119,6 @@ export const selectPassword = (state: RootState) => state.auth.formData.password
 export const selectVerifyPassword = (state: RootState) => state.auth.formData.verifyPassword;
 
 
-export const { resetAuth, setEmail, setVerifyEmail, setPassword, setVerifyPassword, clearError, clearRedirect, clearMessage, resetForm, setMessage } = authSlice.actions;
+export const { resetLoading, resetAuth, setUsername, setEmail, setVerifyEmail, setPassword, setVerifyPassword, clearError, clearRedirect, clearMessage, resetForm, setMessage, setErrorMessage } = authSlice.actions;
 
 export default authSlice.reducer;

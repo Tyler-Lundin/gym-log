@@ -7,16 +7,11 @@ import { clearRedirect, resetAuth } from '../store/auth.slice';
 const useAuth = () => {
     const navTo = useNavigate();
     const dispatch = useAppDispatch();
-    const { isAuth, isLoading, isError, authToken, sessionToken, formData, redirect, message } = useAppSelector((state) => state.auth);
-    const authorization = `bearer ${authToken}`;
-    const session = `bearer ${sessionToken}`;
-    const headers = { authorization, session };
-
+    const { isAuth, isLoading, isError, formData, redirect, message, headers } = useAppSelector((state) => state.auth);
 
     const logout = () => {
         dispatch( resetAuth() );
         dispatch( resetApp() );
-
     }
 
 
@@ -35,8 +30,6 @@ const useAuth = () => {
         isAuth,
         isLoading,
         isError,
-        authToken,
-        sessionToken,
         formData,
         headers,
         message,

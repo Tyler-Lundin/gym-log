@@ -5,6 +5,7 @@ interface AppState {
 	isNavOpen: boolean;
 	isSettingsOpen: boolean;
     isAddExerciseOpen: boolean;
+    isAddExerciseTagOpen: boolean;
 	settings: {
 		theme: Theme;
 		language: string;
@@ -17,6 +18,7 @@ const initialState: AppState = {
 	isNavOpen: false,
 	isSettingsOpen: false,
     isAddExerciseOpen: false,
+    isAddExerciseTagOpen: false,
 	settings: {
 		theme: localStorageTheme ? JSON.parse(localStorageTheme) as Theme : dark ,
 		language: "en",
@@ -34,15 +36,30 @@ const appSlice = createSlice({
 		closeSettings(state) { state.isSettingsOpen = false; },
         openAddExercise(state) { state.isAddExerciseOpen = true; },
         closeAddExercise(state) { state.isAddExerciseOpen = false; },
+        setAddExerciseTagOpen(state, action) { state.isAddExerciseTagOpen = action.payload; },
 		setTheme(state, action) {
 			console.log( action.payload );
             // how do I save the theme to the browser's local storage?
             localStorage.setItem('theme', JSON.stringify(action.payload));
 			state.settings = { ...state.settings, theme: action.payload };
-		}
+		},
+        setLanguage(state, action) { state.settings = { ...state.settings, language: action.payload }; }
 	},
 });
 
-export const { resetApp, openNav, closeNav, openSettings, closeSettings, openAddExercise, closeAddExercise, setTheme } = appSlice.actions;
+
+// todo: change open / close to set
+export const {
+    resetApp,
+    openNav,
+    closeNav,
+    openSettings,
+    closeSettings,
+    openAddExercise,
+    closeAddExercise,
+    setAddExerciseTagOpen,
+    setTheme,
+    setLanguage,
+} = appSlice.actions;
 
 export default appSlice.reducer;

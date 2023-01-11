@@ -1,12 +1,12 @@
-//import styles from '../../../styles/exercises.module.css';
-
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector, useDayId } from "../hooks";
-import useAuth from "../hooks/useAuth";
-import getDayExercisesThunk from "../store/thunks/getDayExercises.thunk";
-import styles from '../styles/exercises.module.css';
-import Exercise from "./exercise";
-import LoadingSpinner from "./LoadingSpinner";
+import { useAppDispatch, useAppSelector, useDayId } from "../../hooks";
+import useAuth from "../../hooks/useAuth";
+import getDayExercisesThunk from "../../store/thunks/getDayExercises.thunk";
+import styles from '../../styles/exercises.module.css';
+import Exercise from "../exercise";
+import { IExercise as ExerciseType } from "../../types";
+import LoadingSpinner from "../uxui/LoadingSpinner";
+import { resetLoading } from "../../store/exercise.slice";
 
 const useExercises = () => {
     const dayId = useDayId();
@@ -14,18 +14,13 @@ const useExercises = () => {
     const { isLoading, isError, exercises } = useAppSelector(state=>state.exercise)
     const { theme } = useAppSelector(state=>state.app.settings);
     const dispatch = useAppDispatch();
-    console.log( { isLoading, isError, exercises } );
 
-    const getExercises = async () => {
-        if (!dayId) return
-        await dispatch( getDayExercisesThunk( headers  ) )
-    }
 
     useEffect(()=>{
-        if (isLoading) return
-        getExercises();
-        if (isError) console.log( 'error! @ exercises.tsx' );
-    },[])
+        if (isLoading) dispatch( resetLoading() );
+        if (isError) dispatch( resetLoading() );
+        dispatch( getDayExercisesThunk( headers  ) )
+    },[dayId])
 
     return {
         theme, isLoading, isError, exercises
@@ -40,8 +35,8 @@ const Exercises = () => {
             <h1>Exercises</h1>
             { isLoading && <LoadingSpinner /> }
             { isError && <p>error</p> }
-            { exercises.map( (E: Exercise, i:string | number) => (
-                <Exercise E={E} i={i} />
+            { exercises.map( (E: ExerciseType, i:string | number) => (
+                <Exercise E={E} key={i} i={i} />
             ))}
 		</div>
 	)

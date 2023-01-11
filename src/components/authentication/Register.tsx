@@ -1,5 +1,5 @@
 import styles from '../../styles/forms.module.css'
-import {  setEmail, setPassword, setVerifyEmail, setVerifyPassword } from '../../store/auth.slice';
+import {  setEmail, setPassword, setUsername, setVerifyEmail, setVerifyPassword } from '../../store/auth.slice';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {selectAuth} from '../../store';
 import registerThunk from '../../store/thunks/register.thunk';
@@ -9,7 +9,7 @@ import { MouseEvent } from 'react';
 
 const Register = () => {
 	const { formData } = useAppSelector(selectAuth);
-	const { email, verifyEmail, password, verifyPassword } = formData;
+	const { username, email, verifyEmail, password, verifyPassword } = formData;
     const { theme } = useAppSelector(state=>state.app.settings);
 
 	const dispatch = useAppDispatch();
@@ -21,6 +21,10 @@ const Register = () => {
 
 	return (
 		<form className={styles.form} onSubmit={(e)=>{e.preventDefault()}}>
+            <div className={styles.formGroup}>
+                <label htmlFor="username">Username</label>
+                <input value={username} onChange={(e)=>dispatch(setUsername(e.target.value))} type="text" name="username" id="username" />
+            </div>
 			<div className={styles.formGroup}>
 				<label htmlFor="email">Email</label>
 				<input autoFocus value={email} onChange={(e)=>dispatch(setEmail(e.target.value))} type="email" name="email" id="email" />

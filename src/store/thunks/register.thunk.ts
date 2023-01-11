@@ -5,6 +5,8 @@ import Register from '../../api/register.api';
 interface ResponsePayload {
     message: string;
     redirect: string;
+    authToken: string;
+    sessionToken: string;
 }
 
 const registerThunk = createAsyncThunk<ResponsePayload, void, { state: RootState }>(
@@ -13,14 +15,18 @@ const registerThunk = createAsyncThunk<ResponsePayload, void, { state: RootState
         let payload:ResponsePayload = {
             message: 'Error Registering User',
             redirect: '',
+            authToken: '',
+            sessionToken: '',
         }
 
 		try {
 			const formData = thunkAPI.getState().auth.formData;
-			const { email, password } = formData;
-			const response = await Register({ email, password });
+			const { username, email, password } = formData;
+			const response = await Register({ username, email, password });
 			if (!response) return thunkAPI.rejectWithValue(payload);
-			return response
+            const { message, redirect, authToken, sessionToken } = response;
+            payload = { message, redirect, authToken, sessionToken };
+            return payload;
 		} catch (error:any) {
             payload.message = error.response.data.message || 'Error Registering User';
             payload.redirect = error.response.data.redirect || '';
