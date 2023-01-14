@@ -35,7 +35,7 @@ const Exercises = () => {
             <h1>Exercises</h1>
             { isLoading && <LoadingSpinner /> }
             { isError && <p>error</p> }
-            { exercises.map( (E: ExerciseType, i:string | number) => (
+            { exercises.map( (E: ExerciseType, i:number) => (
                 <Exercise E={E} key={i} i={i} />
             ))}
 		</div>

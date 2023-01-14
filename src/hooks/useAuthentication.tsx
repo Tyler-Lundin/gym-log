@@ -11,6 +11,7 @@ const useAuthentication = () => {
     const { pathname } = useLocation();
 	const { isLoading, isError, message } = useAuth();
 
+
 	const handleClick = () => {
         if (pathname === '/auth/login') navTo('/auth/register');
         if (pathname === '/auth/register') navTo('/auth/login');

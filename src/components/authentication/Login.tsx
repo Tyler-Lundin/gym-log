@@ -1,7 +1,7 @@
 import styles from '../../styles/forms.module.css'
-import { selectFormData, setEmail, setErrorMessage, setPassword, setRememberMe } from '../../store/auth.slice';
+import { selectFormData, setEmail, setErrorMessage, setIsAuth, setPassword, setRememberMe } from '../../store/auth.slice';
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {loginThunk} from '../../store/thunks/login.thunk';
+import { loginThunk } from '../../store/thunks/login.thunk';
 import {MouseEvent} from 'react';
 import { Link } from 'react-router-dom';
 import validateLogin from '../../util/validateLogin';
@@ -18,6 +18,7 @@ const Login = () => {
         if (!validateLogin(email, password)) return dispatch(setErrorMessage('Please enter a valid email or username, and password'));
         dispatch(loginThunk());
 	}
+
 
 	return (
 		<form className={styles.form} >

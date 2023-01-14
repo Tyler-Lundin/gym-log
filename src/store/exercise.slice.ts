@@ -68,6 +68,12 @@ const exerciseSlice = createSlice({
         resetStagedExercises: (state) => state = { ...state, stagedExercises: [] },
         setNewTagLabel: (state, action) => state = { ...state, newTag: { ...state.newTag, label: action.payload } },
         setNewTagColor: (state, action) => state = { ...state, newTag: { ...state.newTag, color: action.payload } },
+        addTagToStagedExercise: (state, action) => {
+            const { index } = action.payload;
+            const { label, color } = state.newTag;
+            const tag = { label, color };
+            state.stagedExercises[index].tags.push(tag);
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getDayExercisesThunk.fulfilled, (state, action) => {

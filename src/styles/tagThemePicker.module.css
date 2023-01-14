@@ -6,8 +6,7 @@
     width: 100vw;
     height: 40vh;
     display: flex;
-    align-items: center;
-    align-content: center;
+    place-content: center;
     overflow-x: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -38,6 +37,9 @@
     font-weight: bold;
     margin: 0;
     pointer-events: none;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 

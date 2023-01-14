@@ -1,13 +1,33 @@
 
+.addTagButtonContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40vh;
+    min-height: 200px;
+    width: 100vw;
+    display: grid;
+    place-content: center;
+}
+
+.addTagButton {
+    width: 100%;
+    padding: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 0 1rem 1rem 1rem;
+}
 
 .addTagContainer {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh; }
+    height: 100vh;
+}
 
 .addTagBlurContainer {
     transition: all 250ms ease-in-out;
@@ -46,6 +66,7 @@
     transition: all 0.2s ease-in-out;
     border-radius: 0 1rem 1rem 1rem;
     font-weight: bold;
+    z-index: 1;
 }
 
 .newTagContainer > input:focus, .newTagContainer > input:hover {
@@ -68,35 +89,16 @@
     transform: translateX(-50%);
 }
 
-.closeButton {
-	display: grid;
-	border: none;
-	place-content: center;
-	position: absolute;
-	top: 2rem;
-	right: 1rem;
-	width: 40px;
-	height: 40px;
-	z-index: 1;
-    transition: all 0.2s ease-in-out;
-    border-radius: 1rem 0rem 1rem 1rem;
-    background: none;
+.addTagContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
-.closeButton > svg {
-    fill: white;
-    transition: all 0.3s ease-in-out;
-}
-
-.closeButton:hover, .closeButton:focus {
-    border: 1px solid rgb(200,50,50);
-    background: rgb(200,50,50);
-    outline: none;
-    transform: translate( -7px, 7px );
-}
-
-.closeButton:hover > svg, .closeButton:focus > svg {
-    transform: rotate(180deg);
-    fill: black;
-}
 

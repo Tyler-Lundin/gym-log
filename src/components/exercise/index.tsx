@@ -6,7 +6,7 @@ import useExercise from "../../hooks/useExercise";
 
 const Exercise = ({E, i}:{E:ExerciseType, i:number}) => {
     const { c, h } = useExercise();
-    if (c.isAddExerciseTagOpen) return <AddTag />
+    if (c.isAddExerciseTagOpen) return <AddTag i={i}/>
 	return (
 		<div key={i} className={c.containerClasses}>
             <p>{E.time}</p>

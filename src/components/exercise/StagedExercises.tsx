@@ -11,6 +11,9 @@ const StagedExercises = () => {
             {stagedExercises.map((exercise, index) => (
                 <Exercise key={index} i={index} E={exercise} />
             ))}
+            <div className={styles.saveStagedButtonContainer}>
+                <button className={styles.saveStagedButton}>Save</button>
+            </div>
         </div>
     )
 }

@@ -16,12 +16,17 @@ const set = {
     time: (time: string) => dispatch( setTime(time) ),
     tags:(tags: string[]) => dispatch( setTags(tags) ),
     exercise: (exercise: string) => dispatch( setExercise(exercise) ),
-    weight: (weight: string) => dispatch( setWeight(weight) ),
-    reps: (reps: string) => dispatch( setReps(reps) ),
+    weight: (weight: string) => {
+        const numOnlyWithoutLeadingZero = weight.replace(/[^0-9]/g, '').replace(/^0+/, '');
+        dispatch( setWeight(numOnlyWithoutLeadingZero) );
+    },
+    reps: (reps: string) => {
+        const numOnlyWithoutLeadingZero = reps.replace(/[^0-9]/g, '').replace(/^0+/, '');
+        dispatch( setReps(numOnlyWithoutLeadingZero) );
+    },
     formDidSubmit: (formDidSubmit: boolean) => dispatch( setFormDidSubmit(formDidSubmit) ),
     formStep: (formStep: number) => dispatch( setFormStep(formStep) ),
 };
-    type Set = typeof set;
 
     return {
         newExercise,
@@ -31,7 +36,6 @@ const set = {
         isError,
         message,
         set,
-        Set,
     }
 };
 

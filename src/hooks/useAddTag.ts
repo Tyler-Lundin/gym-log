@@ -11,6 +11,11 @@ const useAddTag = () => {
     const backgroundColor = theme.a;
     const borderColor = color === 'black' ? 'black' : 'white';
     const background = tagThemes.find( t => t.name === newTag.color )?.a;
+    const stagedExercise = (index:number) => {
+        dispatch( addTagToStaged(index) );
+        dispatch( setAddExerciseTagOpen(false) );
+    }
+
 
     return {
         close,

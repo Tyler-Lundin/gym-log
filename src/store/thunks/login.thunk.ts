@@ -26,7 +26,8 @@ export const loginThunk = createAsyncThunk<ResponsePayload, void, { state: RootS
             if (rememberMe) {
                 const thirtyDaysFromNow = new Date();
                 thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
-                localStorage.setItem('rememberMe', 'value=true; expires=' + thirtyDaysFromNow.toUTCString());
+                localStorage.setItem('rememberMe', 'true');
+                localStorage.setItem('rememberExpires', thirtyDaysFromNow.toUTCString());
             }
 			return response
 		} catch (error:any) {
