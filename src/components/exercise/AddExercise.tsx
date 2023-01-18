@@ -15,7 +15,7 @@ export const AddExercise = () => {
                 </div>
 
                 <div className={S.formStep}>
-                    <label>{c.formSteps[c.formStep].label}</label>
+                    <label children={c.formSteps[c.formStep].label} className={S.formStepLabel} />
                     <input
                         className={c.inputClasses}
                         autoFocus

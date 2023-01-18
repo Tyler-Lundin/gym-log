@@ -36,7 +36,8 @@ const appSlice = createSlice({
 		closeSettings(state) { state.isSettingsOpen = false; },
         openAddExercise(state) { state.isAddExerciseOpen = true; },
         closeAddExercise(state) { state.isAddExerciseOpen = false; },
-        setAddExerciseTagOpen(state, action) { state.isAddExerciseTagOpen = action.payload; },
+        openAddTag(state) { state.isAddExerciseTagOpen = true; },
+        closeAddTag(state) { state.isAddExerciseTagOpen = false; },
 		setTheme(state, action) {
 			console.log( action.payload );
             // how do I save the theme to the browser's local storage?
@@ -57,7 +58,8 @@ export const {
     closeSettings,
     openAddExercise,
     closeAddExercise,
-    setAddExerciseTagOpen,
+    openAddTag,
+    closeAddTag,
     setTheme,
     setLanguage,
 } = appSlice.actions;

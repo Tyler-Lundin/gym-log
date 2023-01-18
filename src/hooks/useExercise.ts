@@ -1,7 +1,7 @@
 
 import useTheme from './useTheme';
 import { useAppDispatch, useAppSelector } from '.';
-import { setAddExerciseTagOpen } from "../store/app.slice";
+import { openAddTag,  } from "../store/app.slice";
 import { removeStagedExercise } from "../store/exercise.slice";
 import styles from '../styles/exercise.module.css';
 
@@ -14,7 +14,7 @@ const useExercise = () => {
     const containerClasses = [styles.exerciseContainer, isBlack ? styles.black : styles.white].join(' ');
     const open = (e:any) => {
         e.preventDefault();
-        dispatch(setAddExerciseTagOpen(true))
+        dispatch( openAddTag() );
         // also set current exercise ID
     };
 

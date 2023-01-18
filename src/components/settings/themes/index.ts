@@ -97,7 +97,7 @@ const ice = {
 
 const poison = {
 	name: 'poison',
-	color: 'black',
+	color: 'white',
 	softColor: 'rgba(0,0,0,0.5)',
 	borderColor: 'rgba(255,0,255,0.2)',
 	a: 'rgb(150,50,150)',

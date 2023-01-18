@@ -29,7 +29,8 @@ const Exercise = ({E, i}:{E:ExerciseType, i:number}) => {
                     e.preventDefault();
                     h.removeExercise(E._id, i);
                 }}
-                className={styles.removeExercise} children={'X'} />
+                className={styles.removeExercise} children={'X'}
+            />
 		</div>
 	)
 }

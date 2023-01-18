@@ -11,61 +11,60 @@
 	cursor: pointer;
 }
 
-.addExerciseContainer:hover {
-}
-
-
 .button {
     background: none;
-	border-radius: 25% 25% 25% 25%;
-	font-size: 1.5rem;
+	font-size: 3.5rem;
 	margin: 0.5rem;
+    aspect-ratio: 1/1;
+    padding: 1.5rem;
+    border-radius: 50%;
 	display: grid;
 	place-content: center;
     margin: auto;
     transition: all 0.2s ease-in-out;
-}
-
-
-.black {
     border: 1px solid black;
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent;
-}
-
-.white {
-    border: 1px solid white;
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent;
-}
-
-.black:hover, .black:focus {
-	border: 1px solid black;
-    outline: none;
-    background: black;
-    transform: rotate(180deg);
-}
-
-.black:hover > svg, .black:focus > svg {
-    fill: white;
-    transform: rotate(-360deg);
-}
-
-.white:hover, .white:focus {
-    border: 1px solid white;
-    outline: none;
-    background: white;
-    transform: rotate(180deg);
-}
-
-.white:hover > svg, .white:focus > svg {
-    fill: black;
-    transform: rotate(-360deg);
 }
 
 .button > svg {
-    transition: all 250ms ease-in-out;
+    fill: inherit;
+}
+
+.button:hover, .button:focus {
+    transform: scale(1.1);
+    outline: none;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.black {
+    fill: black;
+    border-color: black;
+}
+
+.white {
+    fill: white;
+    border-color: white;
+}
+
+.white:hover, .white:focus {
+    background: white;
+    fill: black;
+}
+
+.black:hover, .black:focus {
+    background: black;
+    fill: white;
 }
 
 
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 

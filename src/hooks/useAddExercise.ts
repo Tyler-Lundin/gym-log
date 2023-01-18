@@ -38,6 +38,10 @@ const useAddExercise = () => {
         if (e.key === 'Enter') handleNext(e);
     }
 
+    const handleSave = (e:any) => {
+        e.preventDefault();
+        dispatch( postStagedExercises() );
+    }
 
         const genFormSteps = () => {
             const formInfo = [ 'exercise', 'weight', 'reps' ];

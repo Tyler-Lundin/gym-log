@@ -47,10 +47,36 @@ const useTheme = () => {
 		}
 	};
 
+
+    const useThemeByName = (themeName: string) => {
+        switch (themeName) {
+            case "light":
+                return light;
+            case "dark":
+                return dark;
+            case "fire":
+                return fire;
+            case "water":
+                return water;
+            case "grass":
+                return grass;
+            case "electric":
+                return electric;
+            case "poison":
+                return poison;
+            case "ground":
+                return ground;
+            default:
+                return dark;
+        }
+    };
+
 	return {
+        useThemeByName,
 		theme,
 		setNewTheme,
 	};
 };
+
 
 export default useTheme;

@@ -9,9 +9,11 @@ const AddExerciseContainer = () => {
 
     return (
         <div className={styles.addExerciseContainer}>
-            <button onClick={open} className={`${styles.button} ${theme.color === 'black' ? styles.black : styles.white }` }>
-                <AiOutlinePlus color={theme.color}/>
-            </button>
+
+
+                <button onClick={open} className={`${styles.button} ${theme.color === 'black' ? styles.black : styles.white }` }>
+                    <AiOutlinePlus color={theme.color}/>
+                </button>
         </div>
     )
 };

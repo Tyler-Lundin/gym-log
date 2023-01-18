@@ -17,12 +17,12 @@ const set = {
     tags:(tags: string[]) => dispatch( setTags(tags) ),
     exercise: (exercise: string) => dispatch( setExercise(exercise) ),
     weight: (weight: string) => {
-        const numOnlyWithoutLeadingZero = weight.replace(/[^0-9]/g, '').replace(/^0+/, '');
-        dispatch( setWeight(numOnlyWithoutLeadingZero) );
+        const W = weight.replace(/[^0-9]/g, '').replace(/^0+/, '');
+        dispatch( setWeight(W === '' ? '0' : W) );
     },
     reps: (reps: string) => {
-        const numOnlyWithoutLeadingZero = reps.replace(/[^0-9]/g, '').replace(/^0+/, '');
-        dispatch( setReps(numOnlyWithoutLeadingZero) );
+        const R = reps.replace(/[^0-9]/g, '').replace(/^0+/, '');
+        dispatch( setReps(R === '' ? '0' : R) );
     },
     formDidSubmit: (formDidSubmit: boolean) => dispatch( setFormDidSubmit(formDidSubmit) ),
     formStep: (formStep: number) => dispatch( setFormStep(formStep) ),

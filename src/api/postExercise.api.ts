@@ -1,7 +1,8 @@
 import axiosInstance from "../configs/axios.config"
+import { IExercise } from "../types";
 import validateExercise from "../util/validateExercise";
 
-type exercisePayload = {
+export type ExercisePayload = {
     dayId: string,
     time: string;
     tags: { label: string; color: string; }[];
@@ -10,22 +11,51 @@ type exercisePayload = {
     reps: number | string;
 }
 
-export type returnSuccess = { isError: false, message: string, exercise: exercisePayload }
-export type returnError = { isError: true, message: string, exercise: [] }
+export interface SuccessResponse {
+    isError: false;
+    message: string;
+    exercise: IExercise;
+}
 
+export interface ErrorResponse {
+    isError: true;
+    message: string;
+}
 
-const PostExercise = async (exercise: exercisePayload, headers:{[key:string]:string}):Promise<returnSuccess | returnError> => {
-    if (!headers.authorization || !headers.session) return { message: 'No authorization headers', isError: true, exercise: [] };
+export type PostExerciseResponse = SuccessResponse | ErrorResponse;
 
-    const newExercise = validateExercise(exercise);
-    if (!newExercise) return { message: 'Invalid exercise', isError: true, exercise: [] };
+const PostExercise = async (
+    exercise: ExercisePayload,
+    headers: { [key: string]: string }
+): Promise<PostExerciseResponse> => {
+
+    if (!headers.authorization || !headers.session) return {
+        message: 'No authorization headers',
+        isError: true,
+    };
+
+    const validatedExercise = validateExercise(exercise);
+    if (!validatedExercise) return {
+        message: 'Invalid exercise',
+        isError: true,
+    };
 
     try {
-        const response = await axiosInstance.post('/api/exercise', { exercise: newExercise }, { headers })
-        return { message: response.data.message, isError: false, exercise: response.data.exercise };
+        const { data } = await axiosInstance.post('/api/exercise', {
+            exercise: validatedExercise
+        }, { headers });
+
+        return {
+            message: data.message,
+            isError: false,
+            exercise: data.exercise
+        };
+
     } catch (error:any) {
-        return { message: error.message, isError: true, exercise: [] };
-    }
-}
+        return {
+            message: error.message,
+            isError: true,
+        };
+    } }
 
 export default PostExercise

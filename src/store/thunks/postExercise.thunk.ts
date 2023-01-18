@@ -1,23 +1,27 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import postExercise, { returnError, returnSuccess } from '../../api/postExercise.api';
+import postExercise, { PostExerciseResponse, ErrorResponse, SuccessResponse } from '../../api/postExercise.api';
 import { RootState, AppDispatch } from "..";
-// import { IExercise } from "../../types";
 
+interface ThunkConfig {
+    state: RootState;
+    dispatch: AppDispatch;
+    rejectValue: any;
+}
 
 const postExerciseThunk = createAsyncThunk<
-    any, // returned value
+    PostExerciseResponse, // returned value
     undefined, // first argument
-    { state: RootState, dispatch: AppDispatch, rejectValue: any } // configs
+    ThunkConfig // configs
 >('exercise/postExercise', async (_, { getState, rejectWithValue, fulfillWithValue }) => {
         const { newExercise } = getState().exercise;
         const { dayId } = getState().day;
         const { headers } = getState().auth;
         try {
             const responsePayload = await postExercise({...newExercise, dayId }, headers);
-            if (responsePayload.isError) return rejectWithValue(responsePayload);
-            return fulfillWithValue(responsePayload);
+            if (responsePayload.isError) return rejectWithValue(responsePayload as ErrorResponse);
+            return fulfillWithValue(responsePayload as SuccessResponse);
         } catch (error:any) {
-            return { isError: true, message: error.message, exercise: [] };
+            return { isError: true, message: error.message };
         }
     }
 );

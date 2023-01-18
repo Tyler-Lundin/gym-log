@@ -4,7 +4,7 @@ import Exercise from '.';
 
 const StagedExercises = () => {
 
-    const { stagedExercises } = useStagedExercises();
+    const { stagedExercises, handleSave } = useStagedExercises();
 
     return (
         <div className={styles.stagedExercises}>
@@ -12,7 +12,7 @@ const StagedExercises = () => {
                 <Exercise key={index} i={index} E={exercise} />
             ))}
             <div className={styles.saveStagedButtonContainer}>
-                <button className={styles.saveStagedButton}>Save</button>
+                <button className={styles.saveStagedButton} onClick={handleSave}>Save</button>
             </div>
         </div>
     )

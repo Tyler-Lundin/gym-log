@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IExercise } from '../types';
 import getDayExercisesThunk from './thunks/getDayExercises.thunk';
 import postExerciseThunk from './thunks/postExercise.thunk';
+import postStagedExercisesThunk from './thunks/postStagedExercises.thunk';
 
 type IExerciseState = {
     newExercise: {
@@ -69,10 +70,11 @@ const exerciseSlice = createSlice({
         setNewTagLabel: (state, action) => state = { ...state, newTag: { ...state.newTag, label: action.payload } },
         setNewTagColor: (state, action) => state = { ...state, newTag: { ...state.newTag, color: action.payload } },
         addTagToStagedExercise: (state, action) => {
-            const { index } = action.payload;
             const { label, color } = state.newTag;
+            console.log('addTagToStagedExercise', label, color);
             const tag = { label, color };
-            state.stagedExercises[index].tags.push(tag);
+            state.stagedExercises[action.payload].tags.push(tag);
+            state.newTag = initialState.newTag;
         },
     },
     extraReducers: (builder) => {
@@ -95,8 +97,7 @@ const exerciseSlice = createSlice({
         });
 
         builder.addCase(postExerciseThunk.fulfilled, (state, action) => {
-            const { message } = action.payload;
-            state.exercises = [...state.exercises, action.payload.exercise];
+            const {  message } = action.payload;
             state.message = message;
             state.isError = false;
             state.isLoading = false;
@@ -112,6 +113,25 @@ const exerciseSlice = createSlice({
             state.isLoading = true;
         });
 
+        builder.addCase(postStagedExercisesThunk.fulfilled, (state, action) => {
+            const { exercises, message } = action.payload;
+            state.exercises = [...state.exercises, ...exercises];
+            state.message = message;
+            state.isError = false;
+            state.isLoading = false;
+        });
+
+        builder.addCase(postStagedExercisesThunk.pending, (state) => {
+            state.isLoading = true;
+            state.isError = false;
+        });
+
+        builder.addCase(postStagedExercisesThunk.rejected, (state, action) => {
+            const { message = 'Error posting exercises!' } = action.payload as { message: string, isError: boolean };
+            state.message = message;
+            state.isError = true;
+            state.isLoading = true;
+        });
     }
 });
 
@@ -135,6 +155,7 @@ export const {
     setNewTagLabel,
     setNewTagColor,
     resetStagedExercises,
+    addTagToStagedExercise,
 } = exerciseSlice.actions;
 
 export default exerciseSlice.reducer;

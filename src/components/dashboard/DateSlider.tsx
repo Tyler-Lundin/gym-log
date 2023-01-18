@@ -16,13 +16,13 @@ const DateSlider = () => {
 
 	return (
 		<div className={containerClasses}>
-            <button className={styles.dateSliderButton} onClick={goYesterday}>{"<"}</button>
+            <button className={styles.dateSliderButton} onClick={goYesterday}>{"<<"}</button>
             <div className={styles.dateSliderDate}>
 			    <p>
 				    {`${D.month}/${D.day}/${D.year}`}
 			    </p>
             </div>
-            <button className={styles.dateSliderButton} onClick={goTomrrow}>{">"}</button>
+            <button className={styles.dateSliderButton} onClick={goTomrrow}>{">>"}</button>
 		</div>
 	);
 };
