@@ -24,11 +24,11 @@ const Login = () => {
 		<form className={styles.form} >
 			<div className={styles.formGroup}>
 				<label htmlFor="email">Email or Username</label>
-				<input autoFocus value={email} onChange={(e)=>dispatch(setEmail(e.target.value))} type="email" name="email" id="email" />
+				<input autoComplete={"username"} autoFocus value={email} onChange={(e)=>dispatch(setEmail(e.target.value))} type="email" name="email" id="email" />
 			</div>
 			<div className={styles.formGroup}>
 				<label htmlFor="password">Password</label>
-				<input value={password} onChange={(e)=>dispatch(setPassword(e.target.value))} type="password" name="password" id="password" />
+				<input autoComplete="current-password" value={password} onChange={(e)=>dispatch(setPassword(e.target.value))} type="password" name="password" id="password" />
 			</div>
             <div className={styles.formOptions}>
                 <div className={styles.formOption}>
@@ -39,7 +39,9 @@ const Login = () => {
                     <Link to='/auth/forgot'>Forgot password?</Link>
                 </div>
             </div>
-			<button onClick={handleClick} className={`${theme.color === 'black' ? styles.blackButton : styles.whiteButton}`}>Login</button>
+			<button
+                onClick={handleClick}
+                className={`${theme.color === 'black' ? styles.blackButton : styles.whiteButton}`}>Login</button>
 		</form>
 	)
 };

@@ -1,0 +1,139 @@
+.daySelectorContainer {
+  justify-self: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 75px;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  gap: 150px;
+  justify-content: space-apart;
+}
+
+.daySelectorButton {
+  display: grid;
+  place-content: center;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  color: inherit;
+  border-radius: 0;
+  position: relative;
+  transition: all 250ms ease-in-out;
+  border-radius: 1rem;
+}
+
+.black {
+  border-color: black;
+}
+
+.white {
+  border-color: white;
+}
+
+.black:hover,
+.black:focus {
+  background: black;
+  color: white;
+}
+
+.white:hover,
+.white:focus {
+  background: white;
+  color: black;
+}
+
+.white:hover::after,
+.white:focus::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: none;
+  background: white;
+  color: black;
+  border-radius: 1rem;
+}
+
+.black:hover::after,
+.black:focus::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 1rem;
+}
+
+.today {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+
+.todayOpen {
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-radius: 0;
+}
+
+.todayOpen:focus, .todayOpen:hover {
+  border-radius: 1rem;
+}
+
+.todayOpen:focus::after,
+.todayOpen:hover::after {
+  content: "today";
+}
+
+.todayClosed {
+  font-size: 1.7rem;
+  font-weight: 600;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  left: 0;
+  transform: translate(0, -50%);
+}
+
+.yesterday:focus::after,
+.yesterday:hover::after {
+  content: "yesterday";
+}
+
+.tomorrow:focus::after,
+.tomorrow:hover::after {
+  content: "tomorrow";
+}
+

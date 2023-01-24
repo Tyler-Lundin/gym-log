@@ -21,16 +21,7 @@ const Exercise = ({E, i}:{E:ExerciseType, i:number}) => {
                 { E.tags.map( (T, i) => (
                     <Tag T={T} key={i} i={i} />
                 ))}
-                <button onClick={h.open} className={styles.addTag}>+</button>
             </div>
-
-            <button
-                onClick={(e:any)=>{
-                    e.preventDefault();
-                    h.removeExercise(E._id, i);
-                }}
-                className={styles.removeExercise} children={'X'}
-            />
 		</div>
 	)
 }

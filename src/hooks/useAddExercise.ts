@@ -6,6 +6,7 @@ import styles from '../styles/addExercise.module.css';
 import { useDayId } from ".";
 import useTime from "./useTime";
 import { closeAddExercise } from "../store/app.slice";
+import postStagedExercisesThunk from "../store/thunks/postStagedExercises.thunk";
 
 const useAddExercise = () => {
     const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const useAddExercise = () => {
 
     const handleSave = (e:any) => {
         e.preventDefault();
-        dispatch( postStagedExercises() );
+        dispatch( postStagedExercisesThunk() );
     }
 
         const genFormSteps = () => {

@@ -9,11 +9,12 @@
 	display: grid;
 	align-content: flex-start;
 	text-align: center;
+    padding: 2rem;
 }
 
 .infoCardContainer > div {
 	position: absolute;
-	bottom: 5%;
+	bottom: 2rem;
 	left: 50%;
 	transform: translateX(-50%);
 }

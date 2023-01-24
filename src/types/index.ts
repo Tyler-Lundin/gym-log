@@ -39,6 +39,7 @@ export interface IDay extends Document {
     date: string;
     userId: string;
     exercises: [string];
+    food: [string];
     stats: IStats
 }
 
@@ -74,40 +75,24 @@ export interface IStats {
     };
 }
 
+export interface IFood extends Document {
+    dayId: string;
+    userId: string;
+    time: string; // 04:00 (military)
+    tags: ITag[];
+    name: string;
+    macros: {
+        protein: number;
+        carbs: number;
+        fat: number;
+    };
+    calories: number;
+}
+
 export interface IFriendRequest extends Document {
     from: string;
     to: string;
     status: 'pending' | 'accepted' | 'rejected';
     message: string;
 }
-
-
-export interface IInitialAssessment extends Document {
-    userId: string;
-    assessment: {
-        age: number;
-        height: number;
-        weight: number;
-        goal: 'lose' | 'maintain' | 'gain';
-        activityLevel: 'sedentary' | 'light' | 'moderate' | 'heavy' | 'extreme';
-    };
-}
-
-
-export type ExerciseName = {
-    movementMode: 'compound' | 'isolation';
-    movementType: 'push' | 'pull' | 'squat' | 'hinge' | 'carry' | 'rotation' | 'other';
-    exercise: AllExercises;
-
-
-}
-
-export type AllExercises =
-    | { name: 'bench press', variations: ['incline', 'decline'], equipment: ['barbell', 'dumbbell' ],  muscleGroups: ['chest', 'triceps'], tags: [ 'bro-split', 'push', 'upper-body'], relatedTo: ['chest fly', 'push ups'] }
-    | { name: 'chest fly', variations: ['incline', 'decline'], equipment: ['dumbbell'], muscleGroups: ['chest', 'triceps'], tags: ['bro-split', 'push', 'upper-body'], relatedTo: ['bench press', 'push ups'] }
-    | { name: 'push ups', variations: ['incline', 'decline', 'knee',], equipment: ['bodyweight'], muscleGroups: ['chest', 'triceps'], tags: ['bro-split', 'push', 'upper-body'], relatedTo: ['chest fly', 'bench press'] }
-    | { name: 'shoulder press', variations: [], equipment: ['barbell', 'dumbbell'], muscleGroups: ['shoulders'], tags: ['bro-split', 'push', 'upper-body'], relatedTo: ['shoulder fly', 'lateral raise'] }
-    | { name: 'shoulder fly', variations: [], equipment: ['dumbbell'], muscleGroups: ['shoulders'], tags: ['bro-split', 'push', 'upper-body'], relatedTo: ['shoulder press', 'lateral raise'] }
-    | { name: 'lateral raise', variations: [], equipment: ['dumbbell'], muscleGroups: ['shoulders'], tags: ['bro-split', 'push', 'upper-body'], relatedTo: ['shoulder fly', 'shoulder press'] }
-
 

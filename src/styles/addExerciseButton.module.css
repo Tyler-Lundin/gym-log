@@ -33,6 +33,7 @@
     transform: scale(1.1);
     outline: none;
     animation: pulse 1s ease-in-out infinite;
+    border-radius: 1rem 1rem 1rem 1rem;
 }
 
 .black {

@@ -40,5 +40,5 @@ const PostStagedExercises = async (exercises: IExercise[], headers:{[key:string]
     }
 }
 
-export default PostStagedExercises
+export default PostStagedExercises;
 

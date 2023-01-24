@@ -1,20 +1,20 @@
 import styles from '../styles/addExerciseButton.module.css';
 
 import { useAppDispatch, useAppSelector } from ".";
-import { openAddExercise } from "../store/app.slice";
+import { openEvents } from "../store/app.slice";
 
-const useAddExerciseContainer = () => {
-    const { isAddExerciseOpen: isOpen } = useAppSelector(state=>state.app);
+const useAddEvent = () => {
+    const { isEventsOpen } = useAppSelector(state=>state.app);
     const dispatch = useAppDispatch();
-    const open = () => dispatch( openAddExercise() );
+    const open = () => dispatch( openEvents() );
     const { theme } = useAppSelector(state=>state.app.settings);
 
 	return {
-		isOpen,
+		isEventsOpen,
         open,
         theme,
         styles,
 	};
 };
 
-export default useAddExerciseContainer;
+export default useAddEvent;

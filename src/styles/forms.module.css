@@ -31,12 +31,13 @@
 .formGroup >input:focus, .formGroup > input:hover {
     box-shadow: inset 0 0 5px 0 silver;
     outline: none;
+    background: white;
 }
 
 
 .form > button {
 	width: 50%;
-	padding: 0.5rem 2rem;
+	padding: 1rem 2rem;
 	border-radius: 0 .5rem .5rem .5rem;
 	transition: all 0.5s ease;
 	text-align: center;
@@ -44,30 +45,31 @@
     text-transform: lowercase;
     font-size: 2rem;
 	justify-self: center;
+    background: none;
 }
 
 .blackButton {
-    border: 1px solid rgb(30,30,30);
+    border: 1px solid black;
     color: black;
 }
 
 .whiteButton {
-    border: 1px solid silver;
+    border: 1px solid white;
     color: white;
 }
 
-.blackButton:hover,.blackButton:focus {
-    border: 1px solid black;
-    background: rgba(30,30,30,0.1);
+.blackButton:hover, .blackButton:focus {
+    background: black;
+    color: white;
+    outline: none;
+    color: white;
+}
+
+.whiteButton:hover, .whiteButton:focus {
+    background: white;
+    color: black;
     outline: none;
     color: black;
-}
-
-.whiteButton:hover, .blackButton:focus {
-    border: 1px solid white;
-    background: rgba(255,255,255,0.1);
-    outline: none;
-    color: white;
 }
 
 
@@ -89,7 +91,11 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-transform: lowercase;
+    position: relative;
+    width: 100%;
+    gap: 1rem;
 }
+
 
 .formOption > a {
     text-decoration: none;

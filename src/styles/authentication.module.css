@@ -7,6 +7,8 @@
 	transform: translateY(-100%);
 	animation: errorAnimation .2s ease-in-out forwards;
 	text-align: center;
+    padding: 2rem;
+    border-radius: 1rem 1rem 0 0;
 }
 
 @keyframes errorAnimation {
@@ -107,15 +109,15 @@
 }
 
 .authContainer > button {
-	padding: 0.5rem;
+	padding: .5rem;
 	background: none;
 	color: inherit;
 	width: fit-content;
 	justify-self: center;
-        text-transform: lowercase;
-        border-radius: 0;
-        border-bottom: 1px solid rgba(170,180,190, .75);
-        transition: all 250ms ease-in-out;
+    text-transform: lowercase;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(170,180,190, .75);
+    transition: all 250ms ease-in-out;
 }
 
 .authContainer > button:hover {

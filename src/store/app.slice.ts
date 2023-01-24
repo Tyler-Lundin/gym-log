@@ -6,6 +6,7 @@ interface AppState {
 	isSettingsOpen: boolean;
     isAddExerciseOpen: boolean;
     isAddExerciseTagOpen: boolean;
+    isEventsOpen: boolean;
 	settings: {
 		theme: Theme;
 		language: string;
@@ -19,6 +20,7 @@ const initialState: AppState = {
 	isSettingsOpen: false,
     isAddExerciseOpen: false,
     isAddExerciseTagOpen: false,
+    isEventsOpen: false,
 	settings: {
 		theme: localStorageTheme ? JSON.parse(localStorageTheme) as Theme : dark ,
 		language: "en",
@@ -34,10 +36,12 @@ const appSlice = createSlice({
 		closeNav(state) { state.isNavOpen = false; state.isSettingsOpen = false; },
 		openSettings(state) { state.isSettingsOpen = true; },
 		closeSettings(state) { state.isSettingsOpen = false; },
-        openAddExercise(state) { state.isAddExerciseOpen = true; },
+        openAddExercise(state) { state.isAddExerciseOpen = true; state.isEventsOpen = false; },
         closeAddExercise(state) { state.isAddExerciseOpen = false; },
         openAddTag(state) { state.isAddExerciseTagOpen = true; },
         closeAddTag(state) { state.isAddExerciseTagOpen = false; },
+        openEvents(state) { state.isEventsOpen = true; },
+        closeEvents(state) { state.isEventsOpen = false; },
 		setTheme(state, action) {
 			console.log( action.payload );
             // how do I save the theme to the browser's local storage?
@@ -60,6 +64,8 @@ export const {
     closeAddExercise,
     openAddTag,
     closeAddTag,
+    openEvents,
+    closeEvents,
     setTheme,
     setLanguage,
 } = appSlice.actions;

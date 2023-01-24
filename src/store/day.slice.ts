@@ -63,6 +63,13 @@ const daySlice = createSlice({
                 year: date.getFullYear(),
             };
         },
+        today: (state) => {
+            state.date = {
+                month: new Date().getMonth() + 1,
+                day: new Date().getDate(),
+                year: new Date().getFullYear(),
+            };
+        }
 	},
     extraReducers: (builder) => {
         builder.addCase(getDayThunk.fulfilled, (state, action) => {
@@ -91,7 +98,16 @@ const daySlice = createSlice({
 export const selectEvents = (state: any) => state.day.events;
 export const selectDate = (state: any) => state.day.date;
 
-export const { reset, resetLoading, resetError, resetMessage, setDate, tomorrow, yesterday } = daySlice.actions;
+export const {
+    reset,
+    resetLoading,
+    resetError,
+    resetMessage,
+    setDate,
+    tomorrow,
+    yesterday,
+    today,
+} = daySlice.actions;
 
 export default daySlice.reducer;
 
