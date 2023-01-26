@@ -14,7 +14,7 @@
   width: 100vw;
   height: 100vh;
   position: absolute;
-  background: black;
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   top: 100%;
@@ -43,8 +43,6 @@
 .nav > ul > li > a {
   text-decoration: none;
   color: white;
-  font-size: 2rem;
-  font-weight: 600;
   padding: 1rem 0;
 }
 
@@ -54,13 +52,18 @@
 
 .navContainer {
   position: absolute;
-  width: fit-content;
+  width: 100vw;
+  backdrop-filter: blur(5px);
+  border-top: 1px solid silver;
+  box-shadow: 0 -5px 5px -5px silver;
   height: fit-content;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
   isolation: isolate;
+  display: grid;
+  justify-content: center;
 }
 
 .navOpenButton {

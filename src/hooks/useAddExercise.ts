@@ -6,7 +6,7 @@ import styles from '../styles/addExercise.module.css';
 import { useDayId } from ".";
 import useTime from "./useTime";
 import { closeAddExercise } from "../store/app.slice";
-import postStagedExercisesThunk from "../store/thunks/postStagedExercises.thunk";
+import { useMemo, useState } from "react";
 
 const useAddExercise = () => {
     const dispatch = useDispatch();
@@ -15,6 +15,8 @@ const useAddExercise = () => {
     const dayId = useDayId();
     const { exercise, formStep } = newExercise;
     const { timeNoSeconds } = useTime();
+    const [inputLength, setInputLength] = useState(0);
+
     const cancel = () => {
         dispatch( closeAddExercise() );
         dispatch( resetStagedExercises() );
@@ -39,41 +41,45 @@ const useAddExercise = () => {
         if (e.key === 'Enter') handleNext(e);
     }
 
-    const handleSave = (e:any) => {
-        e.preventDefault();
-        dispatch( postStagedExercisesThunk() );
+    const genFormSteps = () => {
+        const formInfo = [ 'exercise', 'weight', 'reps' ];
+        const steps:any = [];
+        formInfo.forEach((label, index) => {
+            steps.push({
+                label,
+                props: {
+                    value: newExercise[label as keyof typeof newExercise],
+                    onChange: (e: any) => {
+                        e.preventDefault();
+                        setInputLength(e.target.value.length);
+                        if (label === 'exercise') set.exercise(e.target.value);
+                        if (label === 'weight') set.weight(e.target.value);
+                        if (label === 'reps') set.reps(e.target.value);
+                    },
+                    key: index,
+                },
+            });
+        });
+        return steps;
     }
 
-        const genFormSteps = () => {
-            const formInfo = [ 'exercise', 'weight', 'reps' ];
-            const steps:any = [];
-            formInfo.forEach((label, index) => {
-                steps.push({
-                    label,
-                    props: {
-                        value: newExercise[label as keyof typeof newExercise],
-                        onChange: (e: any) => {
-                            e.preventDefault();
-                            if (label === 'exercise') set.exercise(e.target.value);
-                            if (label === 'weight') set.weight(e.target.value);
-                            if (label === 'reps') set.reps(e.target.value);
-                        },
-                        key: index,
-                    },
-                });
-            });
-            return steps;
-        }
-
-    const formSteps = genFormSteps();
+    const formSteps = useMemo(genFormSteps, [newExercise, formStep, inputLength]);
     const inputClasses = [styles.addExerciseFormInput, [styles[theme.color]]].join(' ');
     const isLastStep = formStep + 1 === formSteps.length;
     const isFirstStep = formStep === 0
 
     return {
-        c: { inputClasses, isLastStep, isFirstStep, formSteps, formStep },
-        h: { handleBack, handleNext, handleKeyDown },
-        S: styles,
+        inputClasses,
+        isLastStep,
+        isFirstStep,
+        formSteps,
+        formStep,
+        handleBack,
+        handleNext,
+        handleKeyDown,
+        styles,
+        theme,
+        inputLength,
     }
 }
 

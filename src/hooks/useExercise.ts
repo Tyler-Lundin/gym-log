@@ -3,7 +3,6 @@ import useTheme from './useTheme';
 import { useAppDispatch, useAppSelector } from '.';
 import { openAddTag,  } from "../store/app.slice";
 import { removeStagedExercise } from "../store/exercise.slice";
-import styles from '../styles/exercise.module.css';
 
 
 const useExercise = () => {
@@ -11,7 +10,6 @@ const useExercise = () => {
     const dispatch = useAppDispatch();
     const { isAddExerciseTagOpen } = useAppSelector(state=>state.app);
     const isBlack = theme.color === 'black';
-    const containerClasses = [styles.exerciseContainer, isBlack ? styles.black : styles.white].join(' ');
     const open = (e:any) => {
         e.preventDefault();
         dispatch( openAddTag() );
@@ -25,8 +23,10 @@ const useExercise = () => {
     };
 
     return {
-        c: { isBlack, containerClasses, isAddExerciseTagOpen },
-        h: { open, removeExercise  },
+        isBlack,
+        isAddExerciseTagOpen,
+        open,
+        removeExercise,
     }
 };
 

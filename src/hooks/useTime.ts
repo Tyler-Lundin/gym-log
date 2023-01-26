@@ -10,7 +10,7 @@ const useTime = () => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setTime(new Date())
-		}, 1000)
+		}, 1000 * 60)
 		return () => clearInterval(interval)
 	}, [])
 

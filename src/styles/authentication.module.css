@@ -1,6 +1,6 @@
 .errorContainer {
 	width: 100%;
-	background-color: rgba(150, 50, 50, 1);
+	background-color: rgba(150, 50, 50, 0.8);
 	position: absolute;
 	top: 0;
 	left: 0;

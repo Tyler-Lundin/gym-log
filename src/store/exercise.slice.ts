@@ -64,7 +64,7 @@ const exerciseSlice = createSlice({
         setReps: (state, action) => state = { ...state, newExercise: { ...state.newExercise, reps: action.payload } },
         setFormDidSubmit: (state, action) => state = { ...state, newExercise: { ...state.newExercise, formDidSubmit: action.payload } },
         setFormStep: (state, action) => state = { ...state, newExercise: { ...state.newExercise, formStep: action.payload } },
-        addStagedExercise: (state,action) => state = { ...state, stagedExercises: [...state.stagedExercises, action.payload] },
+        addStagedExercise: (state,action) => state = { ...state, stagedExercises: [...state.stagedExercises, action.payload].slice(0, 10) },
         removeStagedExercise: (state,action) => { state.stagedExercises.splice(action.payload, 1); },
         resetStagedExercises: (state) => state = { ...state, stagedExercises: [] },
         setNewTagLabel: (state, action) => state = { ...state, newTag: { ...state.newTag, label: action.payload } },

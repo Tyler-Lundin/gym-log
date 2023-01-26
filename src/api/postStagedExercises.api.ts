@@ -34,9 +34,9 @@ const PostStagedExercises = async (exercises: IExercise[], headers:{[key:string]
             message: data.message,
             isError: false,
             exercises: data.exercises
-        };
+        } as SuccessResponse;
     } catch (error:any) {
-        return { message: error.message, isError: true };
+        return { message: error.message, isError: true } as ErrorResponse;
     }
 }
 

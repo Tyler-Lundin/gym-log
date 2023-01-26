@@ -5,7 +5,7 @@ import Settings from "../settings";
 import { RiMenuLine } from "react-icons/ri";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { closeNav, openNav } from "../../store/app.slice";
-import CloseButton from "../uxui/CloseButton";
+import CloseButton from "../uxui/CloseButton"; import useTheme from "../../hooks/useTheme";
 
 const useNavigation = () => {
   const { isNavOpen } = useAppSelector((state) => state.app);
@@ -72,38 +72,58 @@ const useNavigation = () => {
 };
 
 const Navigation = () => {
-  const { openButton, closeButton, isNavOpen, close } = useNavigation();
-  return (
-    <>
-      <div onClick={close} className={isNavOpen ? styles.blurContainer : ""} />
-      <div id="navigation-container" className={styles.navContainer}>
-        {!isNavOpen && openButton()}
-      </div>
+    const { isNavOpen, closeButton } = useNavigation();
 
+    return (
       <nav
         id="navigation-for-dashboard"
         className={`${styles.nav} ${isNavOpen && styles.navOpen}`}
       >
         {isNavOpen && (
-          <>
+          <>{/* unrender for animation for performance */}
             {closeButton()}
             {isNavOpen && <Settings />}
-            <ul>
+            <ul className='gap-12'>
               <li>
-                <Link to="/stats">profile</Link>
+                <Link className='text-5xl' to="/profile">profile</Link>
               </li>
               <li>
-                <Link to="/settings">statistics</Link>
-              </li>
-              <li>
-                <Link to="/seeya">logout</Link>
+                <Link className='text-5xl' to="/seeya">logout</Link>
               </li>
             </ul>
           </>
         )}
       </nav>
+    );
+};
+
+
+const NavigationContainer = () => {
+    const { openButton, isNavOpen, close } = useNavigation();
+    const { theme } = useTheme();
+
+    const c = theme.color;
+    const n = c === "black" ? "white" : "black";
+
+  return (
+    <>
+        <div id='navigation-backdrop-blur' onClick={close} className={isNavOpen ? styles.blurContainer : ""} />
+
+        <div id="navigation-open-button-container"
+            className={`fixed bottom-0 left-0
+                w-screen backdrop-blur-md border-${c}
+                border-solid border-t
+                flex justify-center items-center
+            `}
+            style={{background: theme.b}}
+        >
+            {!isNavOpen && openButton()}
+        </div>
+
+        <Navigation />
     </>
   );
 };
 
-export default Navigation;
+export default NavigationContainer;
+

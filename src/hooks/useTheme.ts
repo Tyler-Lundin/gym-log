@@ -71,9 +71,13 @@ const useTheme = () => {
         }
     };
 
+    const isBlack = theme.color === 'black';
+
+
 	return {
         useThemeByName,
 		theme,
+        isBlack,
 		setNewTheme,
 	};
 };

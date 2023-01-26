@@ -3,16 +3,15 @@ import { useAppDispatch, useAppSelector, useDayId } from "../../hooks";
 import useAuth from "../../hooks/useAuth";
 import getDayExercisesThunk from "../../store/thunks/getDayExercises.thunk";
 import styles from "../../styles/exercises.module.css";
-import Exercise from "../exercise";
+import Exercise from "../exercise/Exercise";
 import { IExercise as ExerciseType } from "../../types";
 import LoadingSpinner from "../uxui/LoadingSpinner";
 import { resetLoading } from "../../store/exercise.slice";
 
-const useExercises = () => {
+export const useExercises = () => {
   const dayId = useDayId();
   const { headers } = useAuth();
-  const { isLoading, isError, exercises } = useAppSelector(
-    (state) => state.exercise
+  const { isLoading, isError, exercises } = useAppSelector( (state) => state.exercise
   );
   const { theme } = useAppSelector((state) => state.app.settings);
   const dispatch = useAppDispatch();
@@ -32,22 +31,20 @@ const useExercises = () => {
 };
 
 const Exercises = () => {
-  const { theme, isLoading, isError, exercises } = useExercises();
+    const { theme, isLoading, isError, exercises } = useExercises();
 
-  return (
-    <div
-      id="dashboard-day-exercises-conatiner"
-      className={`${styles.exercisesContainer} ${
-        theme.color === "black" ? styles.black : styles.white
-      }`}
-    >
-      {isLoading && <LoadingSpinner />}
-      {isError && <p>error</p>}
-      {exercises.map((E: ExerciseType, i: number) => (
-        <Exercise E={E} key={i} i={i} />
-      ))}
-    </div>
-  );
+    return (
+        <div
+            id="dashboard-day-exercises-conatiner"
+            className={`h-full`}
+        >
+            {isLoading && <LoadingSpinner />}
+            {isError && <p>error</p>}
+            {exercises.map((E: ExerciseType, i: number) => (
+                <Exercise E={E} key={i} i={i} />
+            ))}
+        </div>
+    );
 };
 
 export default Exercises;

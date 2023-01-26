@@ -24,6 +24,9 @@ const GlobalStyle = createGlobalStyle<Theme>`
     button:focus, button:focus-visible {
         outline: 4px auto -webkit-focus-ring-color;
     }
+    * {
+        box-sizing: border-box;
+    }
 `
 
 function App() {

@@ -2,25 +2,40 @@ import useAddExercise from '../../hooks/useAddExercise';
 import StagedExercises from './StagedExercises';
 
 export const AddExercise = () => {
-    const { c, h, S } = useAddExercise();
+    const {
+        inputClasses,
+        isLastStep,
+        isFirstStep,
+        formSteps,
+        formStep,
+        handleBack,
+        handleNext,
+        handleKeyDown,
+        styles,
+        theme,
+        inputLength,
+    } = useAddExercise();
+
 	return (
-		<div className={S.addExerciseContainer}>
-			<form className={S.addExerciseForm}>
-                <div className={S.formStepButtons}>
-                    <button className={S.backButton} onClick={h.handleBack}>{ c.isFirstStep ? 'Cancel' : 'Back' }</button>
+		<div className={styles.addExerciseContainer} style={{background:theme.a}}>
+			<form className={styles.addExerciseForm}>
+                <div className={styles.formStepButtons}>
+                    <button className={styles.backButton} onClick={handleBack}>{ isFirstStep ? 'Cancel' : 'Back' }</button>
 
-                    <div className={S.formStepCounter}> {c.formStep + 1} / {c.formSteps.length} </div>
+                    <div className={styles.formStepCounter}> {formStep + 1} / {formSteps.length} </div>
 
-                    <button className={`${S.nextButton} ${c.isLastStep ? S.lastStepButton : ''}`} onClick={h.handleNext}> { c.isLastStep ? 'Add' : 'Next' } </button>
+                    <button className={`${styles.nextButton} ${isLastStep ? styles.lastStepButton : ''}`} onClick={handleNext}> { isLastStep ? 'Add' : 'Next' } </button>
                 </div>
 
-                <div className={S.formStep}>
-                    <label children={c.formSteps[c.formStep].label} className={S.formStepLabel} />
+                <div className={styles.formStep}>
+                    <label children={`${formSteps[formStep].label}:`} className={styles.formStepLabel} />
                     <input
-                        className={c.inputClasses}
+                        className={`${false && inputClasses}
+                            w-full p-4 pt-12
+                        `}
                         autoFocus
-                        onKeyDown={h.handleKeyDown}
-                        {...c.formSteps[c.formStep].props}
+                        onKeyDown={handleKeyDown}
+                        {...formSteps[formStep].props}
                     />
                 </div>
                 <StagedExercises />

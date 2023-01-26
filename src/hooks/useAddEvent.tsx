@@ -1,18 +1,31 @@
 import styles from '../styles/addExerciseButton.module.css';
-
 import { useAppDispatch, useAppSelector } from ".";
-import { openEvents } from "../store/app.slice";
+import { openAddExercise } from "../store/app.slice";
+import useTheme from './useTheme';
 
 const useAddEvent = () => {
-    const { isEventsOpen } = useAppSelector(state=>state.app);
+    const { isEventsOpen, selectedEvent } = useAppSelector(state=>state.app);
     const dispatch = useAppDispatch();
-    const open = () => dispatch( openEvents() );
-    const { theme } = useAppSelector(state=>state.app.settings);
+
+    const open = () => {
+        switch(selectedEvent) {
+            case 'exercise': {
+                dispatch(openAddExercise());
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    }
+
+    const { theme, isBlack } = useTheme();
 
 	return {
 		isEventsOpen,
         open,
         theme,
+        isBlack,
         styles,
 	};
 };
