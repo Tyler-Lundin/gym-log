@@ -1,4 +1,3 @@
-import styles from '../styles/addExerciseButton.module.css';
 import { useAppDispatch, useAppSelector } from ".";
 import { openAddExercise } from "../store/app.slice";
 import useTheme from './useTheme';
@@ -26,7 +25,6 @@ const useAddEvent = () => {
         open,
         theme,
         isBlack,
-        styles,
 	};
 };
 

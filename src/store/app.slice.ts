@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {dark, Theme} from "../components/settings/themes";
+import {light, Theme} from "../components/settings/themes";
 
 interface AppState {
 	isNavOpen: boolean;
@@ -7,6 +7,7 @@ interface AppState {
     isAddExerciseOpen: boolean;
     isAddExerciseTagOpen: boolean;
     isEventsOpen: boolean;
+    isDaySelectorOpen: boolean;
     selectedEvent: 'exercise' | 'food' | 'sleep' | 'weight' | 'mood' | 'note' | 'journal' | 'meditation' | 'water'
 	settings: {
 		theme: Theme;
@@ -22,9 +23,10 @@ const initialState: AppState = {
     isAddExerciseOpen: false,
     isAddExerciseTagOpen: false,
     isEventsOpen: false,
+    isDaySelectorOpen: false,
     selectedEvent: 'exercise',
 	settings: {
-		theme: localStorageTheme ? JSON.parse(localStorageTheme) as Theme : dark ,
+		theme: localStorageTheme ? JSON.parse(localStorageTheme) as Theme : light ,
 		language: "en",
 	},
 };
@@ -44,6 +46,8 @@ const appSlice = createSlice({
         closeAddTag(state) { state.isAddExerciseTagOpen = false; },
         openEvents(state) { state.isEventsOpen = true; },
         closeEvents(state) { state.isEventsOpen = false; },
+        openDaySelector(state) { state.isDaySelectorOpen = true; },
+        closeDaySelector(state) { state.isDaySelectorOpen = false; },
         setSelectedEvent(state, action) { state.selectedEvent = action.payload; },
 		setTheme(state, action) {
 			console.log( action.payload );
@@ -69,6 +73,8 @@ export const {
     closeAddTag,
     openEvents,
     closeEvents,
+    openDaySelector,
+    closeDaySelector,
     setSelectedEvent,
     setTheme,
     setLanguage,

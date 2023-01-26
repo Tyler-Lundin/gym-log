@@ -2,7 +2,7 @@ import { RiSettings5Fill, RiArrowGoBackFill } from "react-icons/ri";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setTheme, openSettings, closeSettings, setLanguage } from "../../store/app.slice";
 import styles from "../../styles/settings.module.css";
-import {dark, light, fire, water, grass, electric, poison, ground, Theme } from "./themes";
+import {dark, light, fire, water, grass, electric, poison, ground, ice } from "./themes";
 
 const useSettings = () => {
 	const dispatch = useAppDispatch();
@@ -19,6 +19,7 @@ const useSettings = () => {
         'electric': electric,
         'poison': poison,
         'ground': ground,
+        'ice': ice,
     };
 
     const handleThemeChange = (e: any) => {
@@ -31,6 +32,14 @@ const useSettings = () => {
         dispatch(setLanguage(e.target.value));
     }
 
+    const renderThemeOptions = () => {
+        return Object.keys(themes).map((theme) => (
+            <option key={theme} value={theme}>
+                {theme}
+            </option>
+        ));
+    }
+
 	return {
 		isSettingsOpen,
 		open,
@@ -38,6 +47,7 @@ const useSettings = () => {
         handleThemeChange,
         settings,
         handleLanguageChange,
+        renderThemeOptions,
 	};
 };
 
@@ -48,11 +58,9 @@ const Settings = () => {
 		open,
 		close,
         handleThemeChange,
-        settings: { theme, language },
-        handleLanguageChange,
+        settings: { theme },
+        renderThemeOptions,
 	} = useSettings();
-
-    console.log( { language } );
 
     const settingClasses = [styles.setting, theme.color === 'black' ? styles.black : styles.white].join(' ');
 
@@ -60,29 +68,14 @@ const Settings = () => {
             <div className={settingClasses}>
 				<label>Theme</label>
 				<select defaultValue={theme.name} onChange={handleThemeChange}>
-                    <option value="dark">Dark</option>
-                    <option value="light">Light</option>
-                    <option value="fire">Fire</option>
-                    <option value="water">Water</option>
-                    <option value="grass">Grass</option>
-                    <option value="electric">Electric</option>
-                    <option value="poison">Poison</option>
-                    <option value="ground">Ground</option>
+                    {renderThemeOptions()}
 				</select>
 			</div>
     )
 
-    const renderLanguageSetting = () => (
-        <div className={settingClasses}>
-            <label>Language</label>
-            <select defaultValue={language} onChange={handleLanguageChange}>
-                <option value="en">English</option>
-                <option value="es">Spanish</option>
-                <option value='fr'>French</option>
-            </select>
-        </div>
-    )
-    const isBlack = theme.color === 'black';
+    const c = theme.color;
+    const isBlack = c === 'black';
+    const n = c === 'black' ? 'white' : 'black';
 	return (
 		<>
 			{isSettingsOpen ? (
@@ -91,14 +84,13 @@ const Settings = () => {
                         <RiArrowGoBackFill color='inherit' size={30}/>
 					</button>
 					{renderThemeSetting()}
-                    {renderLanguageSetting()}
 				</div>
 			) : (
 				<button
 					onClick={open}
 					className={styles.toggleSettingsButton}
 				>
-					<RiSettings5Fill size={"40px"} color="white"/>
+					<RiSettings5Fill size={"40px"} color={n}/>
 				</button>
 			)}
 		</>

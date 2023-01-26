@@ -1,6 +1,5 @@
 import useStagedExercises from "../../hooks/useStagedExercises";
 import useTheme from "../../hooks/useTheme";
-import styles from "../../styles/stagedExercise.module.css";
 import StagedExercise from "./StagedExercise";
 
 const StagedExercises = () => {
@@ -11,11 +10,14 @@ const StagedExercises = () => {
     const t = c === 'black' ? 'white' : 'black';
 
   return (
-    <div className={`${styles.stagedExercises} h-full grid`}>
+    <div className={` h-full grid`}>
 
         { length > 0 && (
             <button
-                className={`mx-4 mt-2 p-4 text-2xl font-bold text-${t} bg-${c} `}
+                className={`
+                    absolute bottom-0 left-0 w-full py-12 z-30 bg-${c} text-${t} text-2xl font-bold rounded-none
+                    focus:outline-none focus:bg-${t} focus:text-${c}
+                `}
                 onClick={handleSave}
             >
                 save ( {length} ) {length === 1 ? 'exercise' : 'exercises'}

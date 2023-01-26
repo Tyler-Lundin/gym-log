@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
-import { useExercises, useTheme } from "../../hooks";
+import { useDay, useExercises, useTheme } from "../../hooks";
 
 
 const ExerciseStats = () => {
     const { exercises } = useExercises();
+    const { day } = useDay();
     const { theme } = useTheme();
     const c = theme.color; // c - color
     const [stats, setStats] = useState({
@@ -17,6 +18,8 @@ const ExerciseStats = () => {
     });
 
     useMemo(() => {
+        if (exercises.length === 0) return
+
         let totalWeight = 0;
         let totalReps = 0;
         let totalSets = 0;
@@ -49,7 +52,7 @@ const ExerciseStats = () => {
             avgReps,
             avgVolume,
         });
-    }, [exercises]);
+    }, [exercises, day]);
 
     return (
             <div id='stats-container' className='grid gap-2 w-full px-4 pt-4 mx-auto mb-5 '>
@@ -74,7 +77,7 @@ const ExerciseStats = () => {
                     </div>
 
                     <div className='flex flex-col text-right'>
-                        <h4> {stats.avgWeight} </h4>
+                        <h4> {stats.avgWeight ?? '-'} </h4>
                         <h4> {stats.avgReps} </h4>
                         <h4> {stats.avgVolume} </h4>
                     </div>

@@ -1,96 +1,45 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "../../styles/navigation.module.css";
 import Settings from "../settings";
+import useTheme from "../../hooks/useTheme";
+import useNavigation from "../../hooks/useNavigation";
 import { RiMenuLine } from "react-icons/ri";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { closeNav, openNav } from "../../store/app.slice";
-import CloseButton from "../uxui/CloseButton"; import useTheme from "../../hooks/useTheme";
+import CloseButton from "../uxui/CloseButton";
 
-const useNavigation = () => {
-  const { isNavOpen } = useAppSelector((state) => state.app);
-  const { theme } = useAppSelector((state) => state.app.settings);
-  const { color } = theme;
-  const dispatch = useAppDispatch();
+const NavMenu = () => {
+    const {
+        isNavOpen,
+        handleClose,
+        theme,
+    } = useNavigation();
 
-  const isBlack = color === "black";
-
-  const open = (e: any) => {
-    e.preventDefault();
-    dispatch(openNav());
-  };
-  const close = (e: any) => {
-    e.preventDefault();
-    dispatch(closeNav());
-  };
-
-  const openClasses = [
-    styles.navOpenButton,
-    isBlack ? styles.blackOpenButton : styles.whiteOpenButton,
-  ].join(" ");
-
-  const openButton = () => (
-    <button onClick={open} className={openClasses}>
-      <RiMenuLine strokeWidth={0} size={40} color={color} />
-      <div className={styles.slidingBox} />
-    </button>
-  );
-
-  const closeButton = () => (
-    <CloseButton
-      onClick={close}
-      disabled={!isNavOpen}
-      className={styles.closeButton}
-    />
-  );
-
-  const handleKeyDown = (e: any) => {
-    console.log("keydown");
-    if (e.key === "Escape") {
-      close(e);
-    }
-  };
-
-  useEffect(() => {
-    if (isNavOpen) {
-      document.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      if (isNavOpen) {
-        document.removeEventListener("keydown", handleKeyDown);
-      }
-    };
-  }, [isNavOpen]);
-
-  return {
-    isNavOpen,
-    openButton,
-    closeButton,
-    close,
-  };
-};
-
-const Navigation = () => {
-    const { isNavOpen, closeButton } = useNavigation();
+    const c = theme.color;
+    const n = c === 'black' ? 'white' : 'black';
 
     return (
       <nav
         id="navigation-for-dashboard"
-        className={`${styles.nav} ${isNavOpen && styles.navOpen}`}
+        style={{background: theme.d}}
+        className={`
+            absolute right-0 -top-20 h-screen w-screen z-50
+            translate-x-full
+            transition-all duration-300 ease-in-out
+            ${ isNavOpen ? '-translate-x-0' : '' }
+        `}
       >
         {isNavOpen && (
-          <>{/* unrender for animation for performance */}
-            {closeButton()}
-            {isNavOpen && <Settings />}
+          <>
+            <CloseButton onClick={handleClose} disabled={!isNavOpen} className={`bg-transparent fill-${c} focus:bg-${c} focus:fill-${n} focus:outline-none`}/>
+
             <ul className='gap-12'>
               <li>
-                <Link className='text-5xl' to="/profile">profile</Link>
+                <Link className={`text-5xl text-${c}`} to="/profile">profile</Link>
               </li>
               <li>
-                <Link className='text-5xl' to="/seeya">logout</Link>
+                <Link className={`text-5xl text-${c}`} to="/logout">logout</Link>
               </li>
             </ul>
+
+            <Settings />
           </>
         )}
       </nav>
@@ -99,29 +48,33 @@ const Navigation = () => {
 
 
 const NavigationContainer = () => {
-    const { openButton, isNavOpen, close } = useNavigation();
+    const { isNavOpen, handleClose, handleOpen } = useNavigation();
     const { theme } = useTheme();
 
     const c = theme.color;
     const n = c === "black" ? "white" : "black";
 
   return (
-    <>
-        <div id='navigation-backdrop-blur' onClick={close} className={isNavOpen ? styles.blurContainer : ""} />
+    <div className='relative top-0 right-0'>
+        <div id='navigation-backdrop-blur' onClick={handleClose} className={isNavOpen ? '' : ''} />
 
         <div id="navigation-open-button-container"
-            className={`fixed bottom-0 left-0
-                w-screen backdrop-blur-md border-${c}
-                border-solid border-t
-                flex justify-center items-center
+            className={`
+                fixed top-2 right-2 h-16 z-50
             `}
-            style={{background: theme.b}}
         >
-            {!isNavOpen && openButton()}
+            {!isNavOpen && (
+                <button onClick={handleOpen} className={`bg-transparent h-full
+                    hover:opacity-80 focus:opacity-80
+                    focus:scale-125 transition-all duration-300 ease-in-out
+                `}>
+                    <RiMenuLine strokeWidth={0} size={40} className='fill-inherit' />
+                </button>
+            )}
         </div>
 
-        <Navigation />
-    </>
+        <NavMenu />
+    </div>
   );
 };
 

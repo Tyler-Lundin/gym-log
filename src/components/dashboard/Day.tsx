@@ -1,5 +1,4 @@
 import useDay from '../../hooks/useDay';
-import DayMenu from './DayMenu';
 import Events from '../events/Events';
 import useTheme from '../../hooks/useTheme';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -27,8 +26,7 @@ const Day = () => {
         }
     }
 	return (
-		<div className={`h-screen box-border w-screen`} >
-            <DayMenu />
+		<div className={`h-screen box-border w-screen py-24`} >
 			<div id='events-container' className={`p-2 h-full`}>
                 {renderCurrentEvent()}
 			</div>

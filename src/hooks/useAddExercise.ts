@@ -2,11 +2,10 @@ import { useDispatch } from "react-redux";
 import useTheme from './useTheme';
 import useExerciseState from './useExerciseState';
 import { addStagedExercise, resetStagedExercises } from '../store/exercise.slice';
-import styles from '../styles/addExercise.module.css';
 import { useDayId } from ".";
 import useTime from "./useTime";
 import { closeAddExercise } from "../store/app.slice";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const useAddExercise = () => {
     const dispatch = useDispatch();
@@ -64,20 +63,21 @@ const useAddExercise = () => {
     }
 
     const formSteps = useMemo(genFormSteps, [newExercise, formStep, inputLength]);
-    const inputClasses = [styles.addExerciseFormInput, [styles[theme.color]]].join(' ');
     const isLastStep = formStep + 1 === formSteps.length;
     const isFirstStep = formStep === 0
 
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [formStep]);
+
     return {
-        inputClasses,
         isLastStep,
         isFirstStep,
         formSteps,
         formStep,
         handleBack,
         handleNext,
-        handleKeyDown,
-        styles,
         theme,
         inputLength,
     }
